@@ -26,15 +26,6 @@
 							class="dropdown-item" href="#">TABLET</a>
 					</div></li>
 				<li>
-				<!-- <li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbardrop"
-					data-toggle="dropdown"> Sign up As </a>
-					<div class="dropdown-menu">
-						<a class="dropdown-item" href="admin">Admin </a>
-						 <a class="dropdown-item" href="vendor">Vendor </a>
-						 <a class="dropdown-item" href="customer">Customer</a>
-					</div>
-				</li> -->
 				 <li>
     				<a class="nav-link" href="signup">SignUp</a>
     			</li>

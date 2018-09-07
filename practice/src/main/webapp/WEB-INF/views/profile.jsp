@@ -23,6 +23,10 @@
  <td>${user.user_mobile }</td>
  </tr>
  <tr>
+ <td>Role</td>
+ <td>${user.role }</td>
+ </tr>
+ <tr>
  <td><label>Password</label></td>
 <td>${user.user_password } </td>
 </tr>

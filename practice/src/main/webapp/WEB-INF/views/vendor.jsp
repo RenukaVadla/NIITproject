@@ -17,6 +17,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-this vendor page
+<nav class="navbar navbar-expand-sm bg-dark navbar-light">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="profile">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="editprofile">Edit Profile</a>
+    </li>
 </body>
 </html>

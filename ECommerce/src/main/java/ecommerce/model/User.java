@@ -31,6 +31,8 @@ public class User {
 	@Column(nullable=false)
 	private String role;
 	
+	private boolean status=false;
+	
 	@Transient
 	private String cofirmpassword;
 	
@@ -45,6 +47,14 @@ public class User {
 	
 	public String getUser_mobile() {
 		return user_mobile;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public void setUser_mobile(String user_mobile) {

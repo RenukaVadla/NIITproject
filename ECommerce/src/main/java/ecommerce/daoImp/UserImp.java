@@ -57,21 +57,7 @@ public class UserImp implements UserDao{
 	}
 
 	
-	public User login(String user_email, String user_password,String role) {
-		// TODO Auto-generated method stub
-		try {
-		Query<User> query=sessionFactory.getCurrentSession().createQuery("from User where user_email=:user_email and user_password=:user_password and role=:role",User.class);
-		query.setParameter("user_email", user_email);
-		query.setParameter("user_password", user_password);
-		query.setParameter("role", role);
-		return query.getSingleResult();
-		}catch (Exception e) {
-			// TODO: handle exception
-			return null;
-		}
-		
-	}
-
+	
 	@Override
 	public boolean update(User user)
 	{
@@ -109,6 +95,19 @@ public class UserImp implements UserDao{
 			// TODO: handle exception
 			return null;
 		}
+	}
+
+	@Override
+	public User login(String user_email, String user_password) {
+		try {
+			Query<User> query=sessionFactory.getCurrentSession().createQuery("from User where user_email=:user_email and user_password=:user_password",User.class);
+			query.setParameter("user_email", user_email);
+			query.setParameter("user_password", user_password);
+			return query.getSingleResult();
+			}catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
 	}
 
 	

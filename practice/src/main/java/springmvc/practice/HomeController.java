@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -83,7 +84,7 @@ public class HomeController {
 	{
 		System.out.println(user.getUser_email());
 		System.out.println(user.getUser_password());
-		 user= userDao.login(user.getUser_email(), user.getUser_password(),user.getRole());
+		 user= userDao.login(user.getUser_email(), user.getUser_password());
 		if(user!= null)
 		{
 			System.out.println(user);
@@ -137,6 +138,23 @@ public class HomeController {
 		model.addAttribute("user", user);
 		return "redirect:/profile";
 		
+	}
+	@GetMapping("accept/{user_id }")
+	public String activate(@PathVariable("user_id") long user_id)
+	{
+		User user=userDao.getUserById(user_id);
+		user.setStatus(true);
+		userDao.update(user);
+		return "redirect:/userdetails";
+	}
+	
+	@GetMapping("reject/{user_id}")
+	public String deactivate(@PathVariable("user_id")long user_id)
+	{
+		User user=userDao.getUserById(user_id);
+		user.setStatus(false);
+		userDao.update(user);
+		return "redirect:/userdetails";
 	}
 	
 }

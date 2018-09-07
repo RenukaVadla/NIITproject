@@ -176,11 +176,9 @@ public class AppTest
 		userDao.addUser(user);
 		String email=user.getUser_email();
 		String password=user.getUser_password();
-		String role=user.getRole();
 		System.out.println(email);
 		System.out.println(password);
-		System.out.println(role);
-		assertEquals("loginUser() testcase failed", user, userDao.login(email,password,role));
+		assertEquals("loginUser() testcase failed", user, userDao.login(email,password));
 	}
 	
 	public void deleteAddress()
