@@ -11,24 +11,24 @@
 <spring:form >
 <table>
 <tr>
-	<td><label> User Name</label></td>
-	<td>${user.user_name} </td>
+	<td><label> Vendor Name</label></td>
+	<td>${vendor.vendor_name} </td>
 </tr>
 <tr>
 <td><label>Email</label></td>
- <td>${user.user_email }</td>
+ <td>${vendor.vendor_email }</td>
  </tr>
  <tr>
  <td><label>Mobile</label></td>
- <td>${user.user_mobile }</td>
+ <td>${vendor.vendor_mobile }</td>
  </tr>
  <tr>
- <td>Role</td>
- <td>${user.role }</td>
+ <td>Company</td>
+ <td>${vendor.company_name }</td>
  </tr>
  <tr>
  <td><label>Password</label></td>
-<td>${user.user_password } </td>
+<td>${vendor.vendor_password } </td>
 </tr>
 <tr>
 <td colspan="2"><a href="editprofile" type="button">Edit Profile</a></td>

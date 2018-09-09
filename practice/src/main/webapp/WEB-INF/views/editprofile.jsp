@@ -8,32 +8,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-<spring:form action="editprofile" method="POST" modelAttribute="user">
-<spring:input path="user_id" type="hidden"/>
+<spring:form action="editprofile" method="POST" modelAttribute="vendor">
+<spring:input path="vendor_id" type="hidden"/>
 <table>
 <tr>
 <td>User Name</td>
-<td><spring:input path="user_name"/></td>
+<td><spring:input path="vendor_name"/></td>
 </tr>
 <tr>
 <td>User Email</td>
-<td><spring:input path="user_email"/>
+<td><spring:input path="vendor_email"/>
+</tr>
+<tr>
+<td>Company</td>
+<td><spring:input path="company_name"/>
 </tr>
 <tr>
 <td>Mobile</td>
-<td><spring:input path="user_mobile"/>
+<td><spring:input path="vendor_mobile"/>
 </tr>
 <tr>
 <td>Password</td>
-<td><spring:input path="user_password" type="hidden"/></td>
-</tr>
+<td><spring:input path="vendor_password" type="hidden"/></td>
+<%-- </tr>
 <tr>
 			<td>Role</td>
 			<td><spring:radiobutton path="role" value="customer"/>Customer</td>
 			<td><spring:radiobutton path="role" value="vendor"/>Vendor</td>
 			<td><spring:radiobutton path="role" value="admin"/>Admin</td>
 		</tr>
-<tr>
+<tr> --%>
 <td><input type="submit" value="Submit"></td>
 </tr>
 </table>

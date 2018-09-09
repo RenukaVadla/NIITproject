@@ -17,16 +17,16 @@
 </head>
 <body>
 <div class="row">
- <spring:form action="login" type="POST" modelAttribute="user">
+ <spring:form action="login" type="POST" modelAttribute="vendor">
  <table>
  <tr>
  	<td><label>Email</label></td>
-	<td><spring:input path="user_email"/></td>
+	<td><spring:input path="vendor_email"/></td>
 </tr>
 <tr>
 
 	<td><label>Password</label></td>
-	<td><spring:input path="user_password"/></td>
+	<td><spring:input path="vendor_password"/></td>
 </tr>
 </table>
 <tr>

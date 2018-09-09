@@ -28,8 +28,8 @@
               <th>userid</th>
               <th>name</th>
               <th>email</th>
+              <th>company</th>
               <th>mobile</th>
-              <th>role</th>
               <th>status</th>
              
            </tr>
@@ -40,21 +40,21 @@
            <tbody>
            
                <tr>
-                      <td><c:out value="${user.user_id }"></c:out></td>
-                      <td><c:out value="${user.user_name }"></c:out></td>
-                      <td><c:out value="${user.user_mobile}"></c:out></td>
-                      <td><c:out value="${user.user_email}"></c:out></td>
-                      <td><c:out value="${user.role}"></c:out></td>
-                       <td><c:out value="${user.status }"></c:out></td>   
+                      <td><c:out value="${vendor.vendor_id }"></c:out></td>
+                      <td><c:out value="${vendor.vendor_name }"></c:out></td>
+                      <td><c:out value="${vendor.vendor_mobile}"></c:out></td>
+                      <td><c:out value="${vendor.company_name }"></c:out></td>
+                      <td><c:out value="${vendor.vendor_email}"></c:out></td>
+                       <td><c:out value="${vendor.status }"></c:out></td>   
                        
                        
-                       <c:set var = "status" scope = "session" value = "${user.status}"/>
+                       <c:set var = "status" scope = "session" value = "${vendor.status}"/>
                        <c:choose>
                        <c:when test="${ status == false}">
-                       <td><a href="accept/${user.user_id }"><input type="button" value="Activate"></a></td>
+                       <td><a href="accept/${vendor.vendor_id }"><input type="button" value="Activate"></a></td>
                        </c:when>
                        <c:when test="${ status == true}">
-                       <td><a href="reject/${user.user_id}"><input type="button" value="Deactivate"></a></td>
+                       <td><a href="reject/${vendor.vendor_id}"><input type="button" value="Deactivate"></a></td>
                        </c:when>
                        </c:choose>
                        

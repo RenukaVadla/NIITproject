@@ -32,29 +32,34 @@
     <div class="bg">
             <div class="container-fluid bg">
                 <div class="row">
-                        <springform:form  action="signup" method="post" modelAttribute="user">
+                        <springform:form  action="signup" method="post" modelAttribute="vendor">
             
             <div class="form-group">
-            <label for="user_name">Name:</label>    
-            <springform:input path="user_name" class="form-control" id="user_name"/>    
-            <springform:errors path="user_name"></springform:errors>    
+            <label for="vendor_name">Name:</label>    
+            <springform:input path="vendor_name" class="form-control" id="vendor_name"/>    
+            <springform:errors path="vendor_name"></springform:errors>    
             </div>
             
             <div class="form-group">
-            <label for="user_mobile">Mobile:</label>    
-            <springform:input path="user_mobile" class="form-control" id="user_mobile"/>        
+            <label for="company_name">Company:</label>    
+            <springform:input path="company_name" class="form-control" id="company_name"/>        
+            </div>    
+            
+            <div class="form-group">
+            <label for="vendor_mobile">Mobile:</label>    
+            <springform:input path="vendor_mobile" class="form-control" id="vendor_mobile"/>        
             </div>    
             
             
             <div class="form-group">
-            <label for="user_email">Email Id:</label>
-            <springform:input path="user_email" class="form-control" id="user_email"/>
+            <label for="vendor_emaill">Email Id:</label>
+            <springform:input path="vendor_email" class="form-control" id="vendor_email"/>
             </div>
             
             
             <div class="form-group">
-            <label for="user_password">Password:</label>    
-            <springform:input path="user_password" class="form-control" id="user_password"/>        
+            <label for="vendor_password">Password:</label>    
+            <springform:input path="vendor_password" class="form-control" id="vendor_password"/>        
             </div>
             
             <div class="form-group">
@@ -63,7 +68,7 @@
             </div>
             
 
-        <td><springform:label path="role">Role:</springform:label></td>
+       <%--  <td><springform:label path="role">Role:</springform:label></td>
         <td>
         <ul>
             <springform:select path="role">
@@ -73,7 +78,7 @@
             </springform:select>
         
         </ul>
-        </td>
+        </td> --%>
         <div class="form-group form-check">
             <label class="form-check-label">
             <input class="form-check-input" type="checkbox">Remember Me</label>

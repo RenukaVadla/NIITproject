@@ -1,3 +1,4 @@
+
 package springmvc.practice;
 
 import java.util.Date;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.vendor.Vendor;
+
 
 
 
@@ -25,7 +28,7 @@ import ecommerce.model.vendor.Vendor;
 public class HomeController {
 	
 	@Autowired
-	private Vendor vendor;
+	private VendorDao vendorDao;
 	
 
 	@RequestMapping("/")
@@ -54,23 +57,23 @@ public class HomeController {
 	public String getsigup(Model model)
 	{
 		
-		model.addAttribute("user", new Vendor());
+		model.addAttribute("vendor", new Vendor());
 		return "signup";
 	}
 	
 	@PostMapping("/signup")
-	public String addUser(@Valid @ModelAttribute("user") Vendor vendor, BindingResult result)
+	public String addUser(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result)
 	{
 		if(!result.hasErrors())
 		{
-			if((userDao.getUserByEmail(user.getUser_email()))!=null)
+			if((vendorDao.getUserByEmail(vendor.getVendor_email()))!=null)
 			{
 			
 				return "signup";
 			}
 			else
 			{
-				userDao.addUser(user);
+				vendorDao.addUser(vendor);
 				return "redirect:/login";
 				
 			}
@@ -84,22 +87,23 @@ public class HomeController {
 	@GetMapping("/login")
 	public String getUser(Model model)
 	{
-		model.addAttribute("user", new User());
+		model.addAttribute("vendor", new Vendor());
 		return "login";
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute("user") User user,HttpSession httpSession,Model model)
+	public String login(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
 	{
-		System.out.println(user.getUser_email());
-		System.out.println(user.getUser_password());
-		 user= userDao.login(user.getUser_email(), user.getUser_password());
-		if(user!= null)
+		System.out.println(vendor.getVendor_email());
+		System.out.println(vendor.getVendor_password());
+		vendor= vendorDao.login(vendor.getVendor_email(), vendor.getVendor_password());
+		if(vendor!= null)
 		{
-			System.out.println(user);
-			httpSession.setAttribute("user", user);
-		    model.addAttribute("user", user);
-		    if((user.getRole()).equalsIgnoreCase("admin"))
+			System.out.println(vendor);
+			httpSession.setAttribute("vendor", vendor);
+		    model.addAttribute("vendor", vendor);
+		    return "vendor";
+		   /* if((user.getRole()).equalsIgnoreCase("admin"))
 		    {
 		    	return "admin";
 		    }else if((user.getRole()).equalsIgnoreCase("vendor"))
@@ -109,7 +113,7 @@ public class HomeController {
 		    {
 		    	return "customer";
 		    }
-		    /*return "profile";*/
+		    return "profile";*/
 		   
 		 }
 			
@@ -118,10 +122,11 @@ public class HomeController {
 			return "login";
 		}
 	}
+	
 	@GetMapping("/userdetails")
 	public String getUserDetails(Map<String, Object> user)
 	{
-		user.put("userList", userDao.getVendorDetails());
+		user.put("userList", vendorDao.getVendorDetails());
 		return "userdetails";
 	}
 	@GetMapping("/profile")
@@ -134,35 +139,36 @@ public class HomeController {
 	@GetMapping("/editprofile")
 	public String editprofile(HttpSession httpSession,Model model)
 	{
-		model.addAttribute("user",httpSession.getAttribute("user"));
+		model.addAttribute("vendor",httpSession.getAttribute("vendor"));
 		return "/editprofile";
 	}
 	
 	
 	@PostMapping("/editprofile")
-	public String editingprofile(@ModelAttribute("user") User user,HttpSession httpSession,Model model)
+	public String editingprofile(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
 	{
-		userDao.update(user);
-		httpSession.setAttribute("user", user);
-		model.addAttribute("user", user);
+		vendorDao.update(vendor);
+		httpSession.setAttribute("vendor", vendor);
+		model.addAttribute("vendor", vendor);
 		return "redirect:/profile";
 		
 	}
+	
 	@GetMapping("accept/{user_id }")
-	public String activate(@PathVariable("user_id") long user_id)
+	public String activate(@PathVariable("vendor_id") long vendor_id)
 	{
-		User user=userDao.getUserById(user_id);
-		user.setStatus(true);
-		userDao.update(user);
+		Vendor vendor=vendorDao.getUserById(vendor_id);
+		vendor.setStatus(true);
+		vendorDao.update(vendor);
 		return "redirect:/userdetails";
 	}
 	
 	@GetMapping("reject/{user_id}")
-	public String deactivate(@PathVariable("user_id")long user_id)
+	public String deactivate(@PathVariable("vendor_id")long vendor_id)
 	{
-		User user=userDao.getUserById(user_id);
-		user.setStatus(false);
-		userDao.update(user);
+		Vendor vendor=vendorDao.getUserById(vendor_id);
+		vendor.setStatus(false);
+		vendorDao.update(vendor);
 		return "redirect:/userdetails";
 	}
 	
