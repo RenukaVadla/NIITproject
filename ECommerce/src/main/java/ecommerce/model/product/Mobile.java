@@ -3,7 +3,7 @@ package ecommerce.model.product;
 import javax.persistence.Entity;
 import org.springframework.stereotype.Component;
 
-import ecommerce.model.Product;
+import ecommerce.model.productdetails.Product;
 @Entity
 @Component("mobile")
 public class Mobile extends Product {

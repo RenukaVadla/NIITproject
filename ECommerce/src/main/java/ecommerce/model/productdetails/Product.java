@@ -1,6 +1,6 @@
-package ecommerce.model;
+package ecommerce.model.productdetails;
 
-import java.util.Set;
+/*import java.util.Set;*/
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
+
+import ecommerce.model.vendor.Vendor;
 
 @Entity
 @Component("product")
@@ -26,7 +28,7 @@ public class Product {
 	
 	
 	@ManyToOne
-	private User user;
+	private Vendor vendor;
 	
 	@ManyToOne
 	private SubCategory subCategory;
@@ -39,12 +41,13 @@ public class Product {
 		this.subCategory = subCategory;
 	}
 
-	public User getUser() {
-		return user;
+	
+	public Vendor getVendor() {
+		return vendor;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 
 	public long getProduct_id() {

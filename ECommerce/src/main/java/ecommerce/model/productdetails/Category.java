@@ -1,4 +1,4 @@
-package ecommerce.model;
+package ecommerce.model.productdetails;
 
 import java.util.Set;
 

@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ecommerce.daolayer.UserDao;
-import ecommerce.model.Login;
-import ecommerce.model.User;
+import ecommerce.model.vendor.Vendor;
+
+
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	private UserDao userDao;
+	private Vendor vendor;
 	
 
 	@RequestMapping("/")
@@ -54,12 +54,12 @@ public class HomeController {
 	public String getsigup(Model model)
 	{
 		
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Vendor());
 		return "signup";
 	}
 	
 	@PostMapping("/signup")
-	public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result)
+	public String addUser(@Valid @ModelAttribute("user") Vendor vendor, BindingResult result)
 	{
 		if(!result.hasErrors())
 		{

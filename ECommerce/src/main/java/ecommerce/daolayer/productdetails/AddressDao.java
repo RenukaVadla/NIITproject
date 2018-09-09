@@ -1,6 +1,6 @@
-package ecommerce.daolayer;
+package ecommerce.daolayer.productdetails;
 
-import ecommerce.model.Address;
+import ecommerce.model.productdetails.Address;
 
 public interface AddressDao {
 	public abstract boolean addAddress(Address address);

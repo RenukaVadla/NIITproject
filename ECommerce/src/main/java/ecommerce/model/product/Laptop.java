@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
-import ecommerce.model.Product;
+import ecommerce.model.productdetails.Product;
 @Entity
 @Component("laptop")
 public class Laptop extends Product {

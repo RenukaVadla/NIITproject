@@ -1,4 +1,4 @@
-package ecommerce.model;
+package ecommerce.model.productdetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

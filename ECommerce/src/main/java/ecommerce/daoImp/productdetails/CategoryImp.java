@@ -1,13 +1,13 @@
-package ecommerce.daoImp;
+package ecommerce.daoImp.productdetails;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import ecommerce.daolayer.CategoryDao;
-import ecommerce.model.Category;
-import ecommerce.model.SubCategory;
+import ecommerce.daolayer.productdetails.CategoryDao;
+import ecommerce.model.productdetails.Category;
+import ecommerce.model.productdetails.SubCategory;
 
 
 public class CategoryImp implements CategoryDao {

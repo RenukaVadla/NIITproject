@@ -1,6 +1,6 @@
-package ecommerce.daolayer;
+package ecommerce.daolayer.productdetails;
 
-import ecommerce.model.Product;
+import ecommerce.model.productdetails.Product;
 
 public interface ProductDao {
 	public abstract boolean addProduct(Product product);

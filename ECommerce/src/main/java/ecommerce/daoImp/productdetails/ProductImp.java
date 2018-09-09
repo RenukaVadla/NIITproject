@@ -1,41 +1,42 @@
-package ecommerce.daoImp;
+package ecommerce.daoImp.productdetails;
 
 import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import ecommerce.daolayer.AddressDao;
-import ecommerce.model.Address;
+import ecommerce.daolayer.productdetails.ProductDao;
+import ecommerce.model.productdetails.Product;
+
 @Component
 @Transactional
-public class AddressImp implements AddressDao {
+public class ProductImp implements ProductDao{
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public boolean addAddress(Address address) {
+	public boolean addProduct(Product product) {
 		// TODO Auto-generated method stub
 		try {
-		sessionFactory.getCurrentSession().save(address);
+		sessionFactory.getCurrentSession().save(product);
 		return true;
-		}catch (Exception e) {
+		}
+		catch (Exception e) {
 			// TODO: handle exception
-			return false;
 		}
 		
+		return false;
 	}
 
-	public boolean deleteAddress(Address address) {
+	public boolean deleteProduct(Product product) {
 		// TODO Auto-generated method stub
 		try {
-		sessionFactory.getCurrentSession().delete(address);
+		sessionFactory.getCurrentSession().delete(product);
 		return true;
 		}catch (Exception e) {
 			// TODO: handle exception
-			return false;
 		}
-		
+		return false;
 	}
-	
 
 }

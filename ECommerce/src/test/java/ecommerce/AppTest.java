@@ -2,39 +2,34 @@ package ecommerce;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ecommerce.daolayer.AddressDao;
-import ecommerce.model.Address;
-import ecommerce.daolayer.ProductDao;
-import ecommerce.daolayer.SubCategoryDao;
-import ecommerce.daolayer.UserDao;
+import ecommerce.daolayer.productdetails.AddressDao;
+import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.productsDao.MobileDao;
-import ecommerce.model.Product;
-import ecommerce.model.SubCategory;
-import ecommerce.model.User;
+import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
+import ecommerce.model.productdetails.Address;
+import ecommerce.model.productdetails.SubCategory;
+import ecommerce.model.vendor.Vendor;
 
 @SpringJUnitConfig(classes= {Configuration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AppTest     
 {
 	@Autowired
-    private User user;
+    private Vendor vendor;
 	@Autowired
-	private UserDao userDao;
+	private VendorDao vendorDao;
 	@Autowired
 	private Address address;
 	@Autowired
@@ -64,12 +59,13 @@ public class AppTest
 	public void setUp()
 	{
 		//AnnotationConfigApplicationContext annotationConfigApplicationContext=new AnnotationConfigApplicationContext(Configuration.class);
+		vendor.setVendor_name("renuka");
+		vendor.setVendor_mobile("9885249966");
+		vendor.setCompany_name("Code");
+		vendor.setVendor_email("renuka@gmail.com");
+		vendor.setVendor_password("vadla");
+		vendor.setCofirmpassword("vadla");
 		
-		user.setUser_name("renuka");
-		user.setUser_mobile("9885249966");
-		user.setUser_email("renuka@gmail.com");
-		user.setUser_password("vadla");
-		user.setRole("vendor");
 
 		address.setState("TS");
 		address.setCity("Hyd");
@@ -100,30 +96,32 @@ public class AppTest
 	@Test
 	public void usertest()
 	{
-		assertEquals("usertest() failed", true, userDao.addUser(user));
+		assertEquals("usertest() failed", true, vendorDao.addUser(vendor));
 	}
 	
 	@Test
 	public void addAddress()
 	{
-		userDao.addUser(user);
-		address.setUser(user);
+		vendorDao.addUser(vendor);
+		address.setVendor(vendor);;
 		assertEquals("addAddress() testcase failed ", true, addressdao.addAddress(address));
 		deleteAddress();
 	}
+	
 	@Test
 	public void updateUser()
 	{
-		userDao.addUser(user);
-		user.setUser_email("renuka5l6@gmail.com");
-		assertEquals("updateUser() testcase failed", true, userDao.update(user));
+		vendorDao.addUser(vendor);
+		vendor.setVendor_email("renuka5l6@gmail.com");
+		
+		assertEquals("updateUser() testcase failed", true, vendorDao.update(vendor));
 	}
-	
+
 	@Test
 	public void addMobile()
 	{
-		userDao.addUser(user);
-        mobile.setUser(user);
+		vendorDao.addUser(vendor);
+        mobile.setVendor(vendor);
         subCategory=subCategoryDao.getCategory(1l);
   	  
   	  	mobile.setSubCategory(subCategory);
@@ -131,11 +129,12 @@ public class AppTest
 		
 		deleteMobile();
 	}
+	
 	@Test
 	public void addLaptop()
-	{
-		userDao.addUser(user);
-		laptop.setUser(user);
+	{ 
+		vendorDao.addUser(vendor);
+		laptop.setVendor(vendor);
 		subCategory=subCategoryDao.getCategory(1l);
 		
 		laptop.setSubCategory(subCategory);
@@ -149,7 +148,7 @@ public class AppTest
 	public void deleteUser()
 	{
 		
-		assertEquals("failed deleteUser()", true, userDao.deleteUser(user));
+		assertEquals("failed deleteUser()", true, vendorDao.deleteUser(vendor));
 		
 		
 	} 
@@ -157,28 +156,31 @@ public class AppTest
 	@Test
 	public void getuserById()
 	{
-		userDao.addUser(user);
-		long id=user.getUser_id();
-		assertEquals("getUserId failed", user, userDao.getUserById(id));
-		System.out.println(userDao.getUserById(id));
+		vendorDao.addUser(vendor);
+		long id=vendor.getVendor_id();
+		assertEquals("getUserId failed",vendor, vendorDao.getUserById(id));
+		System.out.println(vendorDao.getUserById(id));
 	}
+	
 	@Test
 	public void getUserByEmail()
 	{
-		userDao.addUser(user);
-		String email=user.getUser_email();
-		assertEquals("getUserByEmail() testcase failed", user, userDao.getUserByEmail(email));
+		vendorDao.addUser(vendor);
+		String email=vendor.getVendor_email();
+		assertEquals("getUserByEmail() testcase failed", vendor,vendorDao.getUserByEmail(email));
+		System.out.println(vendor.getVendor_email());
 	}
+	
 	
 	@Test
 	public void loginUser()
 	{
-		userDao.addUser(user);
-		String email=user.getUser_email();
-		String password=user.getUser_password();
+		vendorDao.addUser(vendor);
+		String email=vendor.getVendor_email();
+		String password=vendor.getVendor_password();
 		System.out.println(email);
 		System.out.println(password);
-		assertEquals("loginUser() testcase failed", user, userDao.login(email,password));
+		assertEquals("loginUser() testcase failed", vendor, vendorDao.login(email,password));
 	}
 	
 	public void deleteAddress()
@@ -197,4 +199,5 @@ public class AppTest
 		assertEquals("deleteLaptop() failed", true, laptopDao.deleteLaptop(laptop));
 	}
 
-}
+
+	}

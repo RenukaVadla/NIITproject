@@ -1,4 +1,4 @@
-package ecommerce.model;
+package ecommerce.model.productdetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
+
+import ecommerce.model.vendor.Vendor;
+
+
 
 @Entity
 @Component("address")
@@ -20,13 +24,20 @@ public class Address {
 	private String pin;
 	
 	@ManyToOne
-	private User user;
+	private Vendor vendor;
+
 	
-	public User getUser() {
-		return user;
+	public long getAddress_id() {
+		return address_id;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setAddress_id(long address_id) {
+		this.address_id = address_id;
+	}
+	public Vendor getVendor() {
+		return vendor;
+	}
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
 	}
 	public String getState() {
 		return state;
