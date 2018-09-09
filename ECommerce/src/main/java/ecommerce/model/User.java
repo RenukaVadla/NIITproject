@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 
@@ -20,17 +24,31 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long user_id;
+	
+	@NotNull(message="name should not be null")
+	@NotBlank(message="name should not be blank")
 	@Column(unique=false, nullable=false)
 	private String user_name;
+	
+	@NotNull(message="mobile number should not be null")
+	@NotBlank(message="mobile number should not be blank")
+	@Pattern(regexp="^[6-9]\\d{9}" ,message="enter valid mobile number")
 	@Column(unique=true,nullable=false)
 	private String user_mobile;
+	
+	@NotNull(message="Email should not be null")
+	@NotBlank(message="Email should not be blank")
+	@Pattern(regexp="[a-z0-9]{5,15}@[a-z]{3,6}\\.[a-z]{2,6}", message="enter valid email")
 	@Column(unique=true, nullable=false)
 	private String user_email;
+	
+	@NotNull(message="Password should not be null")
+	@NotBlank(message="Password  should not be blank")
 	@Column(unique=false, nullable=false)
 	private String user_password;
+	
 	@Column(nullable=false)
 	private String role;
-	
 	private boolean status=false;
 	
 	@Transient

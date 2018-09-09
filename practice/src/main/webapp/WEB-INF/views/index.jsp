@@ -13,7 +13,7 @@
 
 
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<nav class="navbar navbar-expand-sm bg-light navbar-light">
 			<ul class="nav nav-tabs">
 				<li><a class="navbar-brand" href="#">E-Commerce</a></li>
@@ -50,17 +50,31 @@
 			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 		</ol>
+		<div class="container">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<img class="d-block w-100" src="${image}/image1.jpg"
 					alt="First slide">
+					<div class="carousel-caption">
+    					<h3>Shopping</h3>
+    						<p>Great time</p>
+  					</div>
 			</div>
 			<div class="carousel-item">
 				<img class="d-block w-100" src="${image}/mobile.jpg" alt="Second slide">
+				<div class="carousel-caption">
+    				<h3>Mobile</h3>
+    				<p>World in your hands!!!!!!!</p>
+  				</div>
 			</div>
 			<div class="carousel-item">
 				<img class="d-block w-100" src="${image}/laptop.jpeg" alt="Third slide">
+				<div class="carousel-caption">
+    				<h3>Work</h3>
+    				<p>Enjoy</p>
+  				</div>
 			</div>
+		</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators"
 			role="button" data-slide="prev"> <span
@@ -72,9 +86,21 @@
 			class="sr-only">Next</span>
 		</a>
 	</div>
-
-
-
-
+	
 </body>
 </html>
+<style>
+.container {
+    position: relative;
+    text-align: center;
+    color: black;
+    }
+    .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+</style>
+
+}
+

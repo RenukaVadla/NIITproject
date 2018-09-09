@@ -16,13 +16,15 @@
 <title>Insert title here</title>
 </head>
 <body>
- <%-- <%-- <spring:form action="login" type="POST" modelAttribute="user">
+<div class="row">
+ <spring:form action="login" type="POST" modelAttribute="user">
  <table>
  <tr>
  	<td><label>Email</label></td>
 	<td><spring:input path="user_email"/></td>
 </tr>
 <tr>
+
 	<td><label>Password</label></td>
 	<td><spring:input path="user_password"/></td>
 </tr>
@@ -30,14 +32,15 @@
 <tr>
 <td colspan="2"><input type="submit" class="btn" value="Submit"></td>
 <tr> 
-</spring:form> 	 --%>
-<%-- <tr>
+</spring:form> 	
+</div>
+<%-- <%-- <tr>
 	<td>Role</td>
 	<td><spring:radiobutton path="role" value="customer"/>Customer</td>
 	<td><spring:radiobutton path="role" value="vendor"/>Vendor</td>
 	<td><spring:radiobutton path="role" value="admin"/>Admin</td>
-</tr> --%>
-<!-- <form class="form-horizontal" action="login" type="POST" modelAttribute="user">
+</tr>
+<spring:form class="form-horizontal" action="login" type="POST" modelAttribute="user">
   <div class="form-group">
     <label class="control-label col-sm-2" for="user_email">Email:</label>
     <div class="col-sm-3">
@@ -56,8 +59,8 @@
       <button type="submit" class="btn">Submit</button>
     </div>
   </div>
-</form>
+</spring:form>
 
- -->
+ --%>
 </body>
 </html>
