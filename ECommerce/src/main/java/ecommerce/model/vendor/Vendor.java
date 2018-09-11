@@ -20,7 +20,7 @@ import ecommerce.model.productdetails.Address;
 
 
 @Entity
-@Component("User")
+@Component("Vendor")
 public class Vendor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

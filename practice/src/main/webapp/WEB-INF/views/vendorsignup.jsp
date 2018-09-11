@@ -32,7 +32,7 @@
     <div class="bg">
             <div class="container-fluid bg">
                 <div class="row">
-                        <springform:form  action="signup" method="post" modelAttribute="vendor">
+                        <springform:form  action="vendorsignup" method="post" modelAttribute="vendor">
             
             <div class="form-group">
             <label for="vendor_name">Name:</label>    
@@ -86,6 +86,8 @@
     <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
 </springform:form>
 </div>
+</div>
+</div>
 </body>
 </html>
 
@@ -94,7 +96,7 @@
 
 <style>
 .bg {
-         background-image: url("${image}/signup.jpg");
+         background-image: url(https://blitzen.com/blog/wp-content/uploads/new-tech.jpg);
              width: 100%;
           /*  height: 100vh; */
            background-position: center;

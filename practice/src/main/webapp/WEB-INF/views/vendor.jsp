@@ -25,5 +25,6 @@
     <li class="nav-item">
       <a class="nav-link" href="editprofile">Edit Profile</a>
     </li>
+    </ul>
 </body>
 </html>

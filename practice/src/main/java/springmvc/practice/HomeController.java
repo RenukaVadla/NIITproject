@@ -53,15 +53,15 @@ public class HomeController {
 		return "aboutus";
 	}
 	
-	@GetMapping("/signup")
+	@GetMapping("/vendorsignup")
 	public String getsigup(Model model)
 	{
 		
 		model.addAttribute("vendor", new Vendor());
-		return "signup";
+		return "vendorsignup";
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping("/vendorsignup")
 	public String addUser(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result)
 	{
 		if(!result.hasErrors())
@@ -69,7 +69,7 @@ public class HomeController {
 			if((vendorDao.getUserByEmail(vendor.getVendor_email()))!=null)
 			{
 			
-				return "signup";
+				return "vendorsignup";
 			}
 			else
 			{
@@ -79,7 +79,7 @@ public class HomeController {
 			}
 		}else
 		{
-			return "signup";
+			return "vendorsignup";
 		}
 		
 		
