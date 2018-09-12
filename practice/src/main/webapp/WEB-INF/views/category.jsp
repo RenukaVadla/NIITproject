@@ -12,10 +12,10 @@
 <form action="subcategory" method="post">
        <div class="form-group">
            <label for="sel1">Categories</label>
-            <select class="form-control " id="category">
+            <select class="form-control " id="category" name="category">
                <c:forEach items="${categoryList}" var="category">
                
-               <option value="${category.categoryName }">${category.categoryName }</option>
+               <option value="${category.categoryId }">${category.categoryName }</option>
 
                </c:forEach>
            </select>

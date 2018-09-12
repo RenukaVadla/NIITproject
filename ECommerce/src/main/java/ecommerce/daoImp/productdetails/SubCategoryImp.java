@@ -28,12 +28,12 @@ public class SubCategoryImp implements SubCategoryDao{
 	}
 
 	@Override
-	public List<SubCategory> getSubCategoryDetails(long category_id) {
+	public List<SubCategory> getSubCategoryDetails(long categoryid) {
 		// TODO Auto-generated method stub
 		try {
-			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where category_categoryId=id",SubCategory.class);
-			query.setParameter("id", category_id);
-			return query.getResultList();
+			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where category_categoryId=:id",SubCategory.class);
+			query.setParameter("id", categoryid);
+			return query.list();
 		}catch (Exception e) {
 			// TODO: handle exception
 			return null;

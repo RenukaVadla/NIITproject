@@ -198,15 +198,18 @@ public class HomeController {
 		category.put("categoryList", categoryDao.getCategoryDetails());
 		return "category";
 	}
+	
 	@PostMapping("subcategory")
-	public String getSubCategory(@RequestParam("category")int categoryId, Model model) {
+	public String getSubCategory(@RequestParam("category")long categoryId,Model model) {
 		 
+		System.out.println(subCategoryDao.getSubCategoryDetails(categoryId));
+		System.out.println(categoryId);
 		model.addAttribute("subCategoryList",subCategoryDao.getSubCategoryDetails(categoryId));
-		model.addAttribute("categoryName",categoryDao.getCategoryId(categoryId));
+		model.addAttribute("categoryId",categoryDao.getCategoryId(categoryId));
 		return "subcategory";
 		
 	}
-	@PostMapping("getModel")
+	@PostMapping("getmodel")
 	public String  addProducts(HttpServletRequest request,Model model) {
 		
 		switch(request.getParameter("subCategory_name")) 

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring" %>
@@ -34,33 +35,5 @@
 <tr> 
 </spring:form> 	
 </div>
-<%-- <%-- <tr>
-	<td>Role</td>
-	<td><spring:radiobutton path="role" value="customer"/>Customer</td>
-	<td><spring:radiobutton path="role" value="vendor"/>Vendor</td>
-	<td><spring:radiobutton path="role" value="admin"/>Admin</td>
-</tr>
-<spring:form class="form-horizontal" action="login" type="POST" modelAttribute="user">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="user_email">Email:</label>
-    <div class="col-sm-3">
-      <input path="user_email" type="email" class="form-control" id="email" placeholder="Enter email">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="user_password">Password:</label>
-    <div class="col-sm-3"> 
-      <input path="user_password" type="password" class="form-control" id="pwd" placeholder="Enter password">
-    </div>
-  </div>
-  </div>
-  <div class="form-group"> 
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn">Submit</button>
-    </div>
-  </div>
-</spring:form>
-
- --%>
 </body>
 </html>

@@ -11,7 +11,8 @@ import ecommerce.model.productdetails.Product;
 @Entity
 @Component("laptop")
 public class Laptop extends Product {
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private String laptop_id;
 	private String laptop_process;
 	private String laptop_series;
 	private String laptop_storage;

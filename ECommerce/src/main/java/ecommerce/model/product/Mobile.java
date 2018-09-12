@@ -10,13 +10,19 @@ import ecommerce.model.productdetails.Product;
 @Entity
 @Component("mobile")
 public class Mobile extends Product {
-	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long mobile_id;
 	private String mobile_ram;
 	private String mobile_storage;
 	private String mobile_series;
 	
 	
+	public long getMobile_id() {
+		return mobile_id;
+	}
+	public void setMobile_id(long mobile_id) {
+		this.mobile_id = mobile_id;
+	}
 	public String getMobile_ram() {
 		return mobile_ram;
 	}

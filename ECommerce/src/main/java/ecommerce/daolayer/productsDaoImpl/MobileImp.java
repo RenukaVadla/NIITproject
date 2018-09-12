@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,15 +48,22 @@ public class MobileImp implements MobileDao
 	}
 
 
-	/*@Override
-	public List<Mobile> getVendorDetails() {
+	@Override
+	public Mobile getMobileBySeries(String mobile_series) {
 		// TODO Auto-generated method stub
 		try {
-			Query<Mobile> query=sessionFactory.getCurrentSession().createQuery("from Category",cate)
+			Query<Mobile> query=sessionFactory.getCurrentSession().createQuery("from Mobile where mobile_series=:mobile_series",Mobile.class);
+			query.setParameter("mobile_series", mobile_series);
+			return query.getSingleResult();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 		return null;
-	}*/
+	}
 
+
+	
 
 	
 	
