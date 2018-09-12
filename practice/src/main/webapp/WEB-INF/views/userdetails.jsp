@@ -21,11 +21,11 @@
       
   
      
-     <c:if test="${!empty userList }">
+     <c:if test="${!empty vendorList }">
         <table  class="table table-bordered table-sm">
         <thead>
             <tr>
-              <th>userid</th>
+              <th>vendorid</th>
               <th>name</th>
               <th>email</th>
               <th>company</th>
@@ -36,7 +36,7 @@
         
         </thead>
            
-           <c:forEach  items="${userList }"  var="user">
+           <c:forEach  items="${vendorList }"  var="vendor">
            <tbody>
            
                <tr>

@@ -25,6 +25,10 @@
     <li class="nav-item">
       <a class="nav-link" href="editprofile">Edit Profile</a>
     </li>
-    </ul>
+    <li class="nav-item">
+    	<a class="nav-link" href="category">Add Products</a>
+    	<!-- <a class="nav-link" href="subcategory">Add Products</a> -->
+    </li>
+   </ul>
 </body>
 </html>

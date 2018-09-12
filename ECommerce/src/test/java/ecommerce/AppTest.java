@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ecommerce.daolayer.admin.AdminDao;
 import ecommerce.daolayer.productdetails.AddressDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
@@ -20,6 +21,7 @@ import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
 import ecommerce.model.productdetails.Address;
 import ecommerce.model.productdetails.SubCategory;
+import ecommerce.model.vendor.AdminDetails;
 import ecommerce.model.vendor.Vendor;
 
 @SpringJUnitConfig(classes= {Configuration.class})
@@ -34,7 +36,10 @@ public class AppTest
 	private Address address;
 	@Autowired
 	private AddressDao addressdao;
-	
+	@Autowired
+	private AdminDetails admin;
+	@Autowired
+	private AdminDao adminDao;
 	/*@Autowired
 	private ProductDao productDao;
 	@Autowired
@@ -55,6 +60,7 @@ public class AppTest
 	private SubCategory subCategory;
 	
 	
+	
 	@Before
 	public void setUp()
 	{
@@ -72,6 +78,9 @@ public class AppTest
 		address.setStreet("StreetNo6");
 		address.setPin("500013");
 		
+		admin.setAdmin_name("renuka");
+		admin.setAdmin_email("vadlarenuka@gmail.com");
+		admin.setAdmin_password("renuka");
 		
 	
 		mobile.setProduct_brand("samsung");
@@ -116,6 +125,17 @@ public class AppTest
 		
 		assertEquals("updateUser() testcase failed", true, vendorDao.update(vendor));
 	}
+ @Test
+	public void addAdmin()
+	{
+	
+		assertEquals("addAdmin() failed", true, adminDao.addAdmin(admin));
+		deleteAdmin();
+	}
+	public void deleteAdmin()
+	{
+		adminDao.deleteAdmin(admin);
+	}
 
 	@Test
 	public void addMobile()
@@ -147,8 +167,12 @@ public class AppTest
 	@After
 	public void deleteUser()
 	{
+		if(vendorDao.getUserById(vendor.getVendor_id())!=null)
+		{
+			assertEquals("failed deleteUser()", true, vendorDao.deleteUser(vendor));
+
+		}
 		
-		assertEquals("failed deleteUser()", true, vendorDao.deleteUser(vendor));
 		
 		
 	} 

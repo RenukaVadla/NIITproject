@@ -4,6 +4,7 @@ package springmvc.practice;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -16,9 +17,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ecommerce.daolayer.admin.AdminDao;
+import ecommerce.daolayer.productdetails.CategoryDao;
+import ecommerce.daolayer.productdetails.SubCategoryDao;
+import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.vendor.VendorDao;
+import ecommerce.model.product.Laptop;
+import ecommerce.model.product.Mobile;
+import ecommerce.model.vendor.AdminDetails;
 import ecommerce.model.vendor.Vendor;
 
 
@@ -29,8 +38,13 @@ public class HomeController {
 	
 	@Autowired
 	private VendorDao vendorDao;
+	@Autowired
+	private AdminDao adminDao;
+	@Autowired
+	private CategoryDao categoryDao;
+	@Autowired
+	private SubCategoryDao subCategoryDao;
 	
-
 	@RequestMapping("/")
 	public ModelAndView indexPage()
 	{
@@ -103,18 +117,6 @@ public class HomeController {
 			httpSession.setAttribute("vendor", vendor);
 		    model.addAttribute("vendor", vendor);
 		    return "vendor";
-		   /* if((user.getRole()).equalsIgnoreCase("admin"))
-		    {
-		    	return "admin";
-		    }else if((user.getRole()).equalsIgnoreCase("vendor"))
-		    {
-		    	return "vendor";
-		    }else
-		    {
-		    	return "customer";
-		    }
-		    return "profile";*/
-		   
 		 }
 			
 		else
@@ -122,11 +124,29 @@ public class HomeController {
 			return "login";
 		}
 	}
+	@GetMapping("/adminlogin")
+	public String getAdmin(Model model)
+	{
+		model.addAttribute("admin", new AdminDetails());
+		return "adminlogin";
+	}
+	@PostMapping("/adminlogin")
+	public String adminLogin(@ModelAttribute("admin") AdminDetails admin,HttpSession httpSession,Model model)
+	{
+		if((adminDao.getAdminByEmail(admin.getAdmin_email()))!=null)
+		{
+			return "admin";
+		}else
+		{
+			return "index";
+		}
+	}
 	
 	@GetMapping("/userdetails")
-	public String getUserDetails(Map<String, Object> user)
+	public String getUserDetails(Map<String, Object> vendor)
 	{
-		user.put("userList", vendorDao.getVendorDetails());
+		System.out.println(vendorDao.getVendorDetails());
+		vendor.put("vendorList", vendorDao.getVendorDetails());
 		return "userdetails";
 	}
 	@GetMapping("/profile")
@@ -172,4 +192,32 @@ public class HomeController {
 		return "redirect:/userdetails";
 	}
 	
+	@GetMapping("/category")
+	public String getCategory(Map<String, Object> category)
+	{
+		category.put("categoryList", categoryDao.getCategoryDetails());
+		return "category";
+	}
+	@PostMapping("subcategory")
+	public String getSubCategory(@RequestParam("category")int categoryId, Model model) {
+		 
+		model.addAttribute("subCategoryList",subCategoryDao.getSubCategoryDetails(categoryId));
+		model.addAttribute("categoryName",categoryDao.getCategoryId(categoryId));
+		return "subcategory";
+		
+	}
+	@PostMapping("getModel")
+	public String  addProducts(HttpServletRequest request,Model model) {
+		
+		switch(request.getParameter("subCategory_name")) 
+		{
+		  case "Laptop": model.addAttribute("laptop" ,new Laptop());
+		  return "laptop";
+		  
+		  case "Mobile": model.addAttribute("mobile" ,new Mobile());
+		   return "mobile";
+		   
+		default: return "subcategory";
+		}
+	}
 }

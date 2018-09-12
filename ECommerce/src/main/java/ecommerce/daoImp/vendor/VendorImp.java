@@ -96,7 +96,7 @@ public class VendorImp implements VendorDao{
 	public List<Vendor> getVendorDetails() {
 		// TODO Auto-generated method stub
 				try {
-				Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from User where role='vendor'",Vendor.class);
+				Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor",Vendor.class);
 				return query.getResultList();
 				}catch (Exception e) {
 					// TODO: handle exception

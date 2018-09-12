@@ -26,7 +26,7 @@
       <a class="nav-link" href="editprofile">Edit Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="userdetails">Users</a>
+      <a class="nav-link" href="userdetails">Vendor</a>
     </li>
   </ul>
 </nav>

@@ -1,5 +1,7 @@
 package ecommerce.daolayer.productsDaoImpl;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 
 import org.hibernate.SessionFactory;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ecommerce.daolayer.productsDao.MobileDao;
 import ecommerce.model.product.Mobile;
+import ecommerce.model.vendor.Vendor;
 @Component
 @Transactional
 public class MobileImp implements MobileDao
@@ -42,6 +45,19 @@ public class MobileImp implements MobileDao
 		}
 		
 	}
+
+
+	/*@Override
+	public List<Mobile> getVendorDetails() {
+		// TODO Auto-generated method stub
+		try {
+			Query<Mobile> query=sessionFactory.getCurrentSession().createQuery("from Category",cate)
+		}
+		return null;
+	}*/
+
+
+	
 	
 		
 	

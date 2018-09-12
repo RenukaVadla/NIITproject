@@ -1,6 +1,9 @@
 package ecommerce.daoImp.productdetails;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,20 @@ public class SubCategoryImp implements SubCategoryDao{
 			return null;
 		}
 	
+		
+	}
+
+	@Override
+	public List<SubCategory> getSubCategoryDetails(long category_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where category_categoryId=id",SubCategory.class);
+			query.setParameter("id", category_id);
+			return query.getResultList();
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 		
 	}
 

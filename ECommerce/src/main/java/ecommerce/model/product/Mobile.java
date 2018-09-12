@@ -1,6 +1,9 @@
 package ecommerce.model.product;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import org.springframework.stereotype.Component;
 
 import ecommerce.model.productdetails.Product;
@@ -8,6 +11,7 @@ import ecommerce.model.productdetails.Product;
 @Component("mobile")
 public class Mobile extends Product {
 	
+	private long mobile_id;
 	private String mobile_ram;
 	private String mobile_storage;
 	private String mobile_series;

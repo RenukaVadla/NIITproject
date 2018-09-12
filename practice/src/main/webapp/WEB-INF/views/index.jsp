@@ -21,9 +21,9 @@
 					class="nav-link dropdown-toggle" href="#" id="navbardrop"
 					data-toggle="dropdown"> Gadgets </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">SMARTPHONES </a> <a
-							class="dropdown-item" href="#">LAPTOP </a> <a
-							class="dropdown-item" href="#">TABLET</a>
+						<a class="dropdown-item" href="#">MOBILE </a> <a
+							class="dropdown-item" href="#">LAPTOP </a>
+							
 					</div></li>
 				<li>
 				<li class="nav-item dropdown"><a
