@@ -174,7 +174,7 @@ public class HomeController {
 		
 	}
 	
-	@GetMapping("accept/{user_id }")
+	@GetMapping("accept/{vendor_id}")
 	public String activate(@PathVariable("vendor_id") long vendor_id)
 	{
 		Vendor vendor=vendorDao.getUserById(vendor_id);
@@ -183,7 +183,7 @@ public class HomeController {
 		return "redirect:/userdetails";
 	}
 	
-	@GetMapping("reject/{user_id}")
+	@GetMapping("reject/{vendor_id}")
 	public String deactivate(@PathVariable("vendor_id")long vendor_id)
 	{
 		Vendor vendor=vendorDao.getUserById(vendor_id);

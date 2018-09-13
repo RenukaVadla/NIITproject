@@ -1,7 +1,9 @@
 package ecommerce.daoImp.productdetails;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,19 @@ public class ProductImp implements ProductDao{
 			// TODO: handle exception
 		}
 		return false;
+	}
+
+	@Override
+	public List<Product> getAllProducts(long vendor_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<Product> query=sessionFactory.getCurrentSession().createQuery("from Product where vendor_vendor_id =: id", Product.class);
+			query.setParameter("id", vendor_id);
+			return query.getResultList();
+		} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+		}
 	}
 
 }

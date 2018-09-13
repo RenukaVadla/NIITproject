@@ -8,13 +8,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-<springform:form action="mobile" method="POST" modelAttribute="mobile">
-<springform:input path="product_brand" id="product_brand"/>
-<springform:input path="mobile_ram" id="mobile_ram"/>
-<springform:input path="mobile_series" id="mobile_series"/>
-<springform:input path="mobile_storage" id="mobile_storage"/>
-<springform:input path="warrenty" id="warrenty"/>
-<springform:button type="submit" value="Submit">Save</springform:button>
+<springform:form action="mobile" method="POST" modelAttribute="mobile" enctype="multipart/form-date">
+<table>
+	<tr>
+		<td><label>Brand</label></td>
+		<td><springform:input path="product_brand" id="product_brand"/></td>
+	</tr>
+	<tr>
+		<td><label>Ram</label></td>
+		<td><springform:input path="mobile_ram" id="mobile_ram"/></td>
+	</tr>
+	<tr>
+		<td><label>Series</label></td>
+		<td><springform:input path="mobile_series" id="mobile_series"/></td>
+	</tr>
+	<tr>
+		<td><label>Storage</label></td>
+		<td><springform:input path="mobile_storage" id="mobile_storage"/></td>
+	</tr>
+	<tr>
+		<td>Warrenty</td>
+		<td><springform:input path="warrenty" id="warrenty"/></td>
+	</tr>
+	<tr>
+		<td>Image</td>
+		<td><springform:input path="image" type="file" id="image"/></td>
+	</tr>
+	<springform:button type="submit" value="Submit">Save</springform:button>
+</table>
 </springform:form>
 </body>
 </html>

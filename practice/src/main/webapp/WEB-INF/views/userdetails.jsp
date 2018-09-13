@@ -18,27 +18,24 @@
 
 </head>
 <body>
-      
-  
-     
-     <c:if test="${!empty vendorList }">
+    <c:if test="${!empty vendorList }">
         <table  class="table table-bordered table-sm">
-        <thead>
-            <tr>
-              <th>vendorid</th>
-              <th>name</th>
-              <th>email</th>
-              <th>company</th>
-              <th>mobile</th>
-              <th>status</th>
+        	<thead>
+            	<tr>
+              		<th>vendorid</th>
+              		<th>name</th>
+              		<th>email</th>
+              		<th>company</th>
+              		<th>mobile</th>
+              		<th>status</th>
              
            </tr>
         
         </thead>
            
-           <c:forEach  items="${vendorList }"  var="vendor">
-           <tbody>
            
+           <tbody>
+           <c:forEach  items="${vendorList }"  var="vendor">
                <tr>
                       <td><c:out value="${vendor.vendor_id }"></c:out></td>
                       <td><c:out value="${vendor.vendor_name }"></c:out></td>
@@ -63,10 +60,11 @@
                     <td> <a href="reject/${user.user_id }"><input type="button" value="reject" />  </a></td> --%>
                            
                 </tr>
+                 </c:forEach>
            </tbody>
              
            
-           </c:forEach>
+          
         
         </table>
         
