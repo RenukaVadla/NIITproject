@@ -63,6 +63,16 @@ public class MobileImp implements MobileDao
 	}
 
 
+	@Override
+	public Mobile getMobileDetails(long product_id) {
+		try {
+			return sessionFactory.getCurrentSession().get(Mobile.class,product_id);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+
 	
 
 	

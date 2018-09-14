@@ -16,7 +16,7 @@
 		 <property name="prefix" value="/WEB-INF/views/"></property>
 		 <property name="suffix" value=".jsp"></property>
 		 </bean>
-		 <bean id="multipartresolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
 		 </bean>
 </beans>

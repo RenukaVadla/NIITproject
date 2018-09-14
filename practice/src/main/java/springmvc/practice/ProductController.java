@@ -18,9 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ecommerce.daolayer.productdetails.ProductDao;
+import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.productsDao.MobileDao;
 import ecommerce.model.product.Laptop;
@@ -37,6 +39,8 @@ public class ProductController {
 	LaptopDao laptopDao;
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	SubCategoryDao subcategoryDao;
 
 	@GetMapping("mobile")
 	public String getMobile(Model model)
@@ -44,13 +48,17 @@ public class ProductController {
 		model.addAttribute("mobile",new Mobile());
 		return "mobile";
 	}
-	@PostMapping("mobile")
-	public String addMobile(@ModelAttribute("mobile") Mobile mobile,HttpServletRequest request)
+	
+	@PostMapping("addmobile")
+	public String addMobile(@ModelAttribute("mobile") Mobile mobile,HttpServletRequest request,HttpSession session)
 	{
 		List<NoOfProducts> noOfProducts=listOfProducts(mobile);
+		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		mobile.setVendor(vendor);
 		mobile.setNoOfProducts(noOfProducts);
-		if(mobileDao.addMobile(mobile))
-		{
+		/*mobileDao.addMobile(mobile);
+		return "redirect:/category";*/
+		if(mobileDao.addMobile(mobile)) {
             
             String contextPath=request.getRealPath("/");
             File file=new File(contextPath+"/resources/resource/products/");
@@ -62,9 +70,10 @@ public class ProductController {
             
             System.out.println(file.getPath());
             FileOutputStream fileOutputStream=null;
+            InputStream inputStream=null;
             try {
                  fileOutputStream=new FileOutputStream(file.getPath()+"/"+mobile.getProduct_id()+".jpg");
-                InputStream inputStream=mobile.getImage().getInputStream();
+                 inputStream =mobile.getImage().getInputStream();
                 byte[] imageBytes=new byte[inputStream.available()];
                 inputStream.read(imageBytes);
                 
@@ -85,11 +94,15 @@ public class ProductController {
                 }
             }
             return "redirect:/category";
-		}else {
-        	
-        	return "getModel";
-        	}
-        }             
+		}
+        else{
+        	 return "redirect:/subcategory";
+            }
+            }
+            
+            
+	
+	
             
 	private List<NoOfProducts> listOfProducts(Product product)
 	{
@@ -115,14 +128,62 @@ public class ProductController {
 		laptopDao.addLaptop(laptop);
 		return "redirect:/category";
 	}
+	
 	@GetMapping("productdetails")
 	public String getProducts(HttpSession session,Model model,Map<String,Object> products) {
 		
-		Vendor vendor=(Vendor)session.getAttribute("vendorDetails");
+		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		System.out.println(vendor);
+		System.out.println(vendor.getVendor_id());
 		products.put("productList", productDao.getAllProducts(vendor.getVendor_id()));
-
-		return "productdetails";	
+		return "productview";	
 	}
+	@GetMapping("viewproduct/{product_id}")
+	public String viewProducts(@PathVariable("product_id") long product_id, Model model) {
+
+		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id))
+				.getSubCategory_name();
+		System.out.println(name);
+		switch (name) {
+		case "Mobile":
+			model.addAttribute("mobile", mobileDao.getMobileDetails(product_id));
+			return "mobilespecifications";
+
+		case "Laptop":
+			model.addAttribute("laptop", laptopDao.getlaptopDetails(product_id));
+			return "laptopspecifications";
+
+		default:
+			return "productdetails";
+		}
+	}
+
+	@GetMapping("editproduct/{product_id}")
+	public String editProducts(@PathVariable("product_id") long product_id, Model model,HttpServletRequest request) {
+
+		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id))
+				.getSubCategory_name();
+		
+		
+		
+		switch (name) {
+
+		case "Mobile":
+			model.addAttribute("contextPath",request.getContextPath());
+			model.addAttribute("mobile", mobileDao.getMobileDetails(product_id));
+			return "editmobile";
+
+		case "Laptop":
+			model.addAttribute("contextPath",request.getContextPath());
+			model.addAttribute("laptop", laptopDao.getlaptopDetails(product_id));
+			return "editlaptop";
+
+		default:
+			return "productdetails";
+		}
+	}
+
+
 	
 
 }

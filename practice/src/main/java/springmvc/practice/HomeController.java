@@ -1,4 +1,3 @@
-
 package springmvc.practice;
 
 import java.util.Date;
@@ -27,11 +26,9 @@ import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
+import ecommerce.model.productdetails.SubCategory;
 import ecommerce.model.vendor.AdminDetails;
 import ecommerce.model.vendor.Vendor;
-
-
-
 
 @Controller
 public class HomeController {
@@ -210,8 +207,17 @@ public class HomeController {
 		
 	}
 	@PostMapping("getmodel")
-	public String  addProducts(HttpServletRequest request,Model model) {
+	public String  addProducts(HttpServletRequest request,Model model,HttpSession httpSession) {
 		
+		SubCategory subCategory=subCategoryDao.getSubCategory(Long.parseLong(request.getParameter("subCategory_id")));
+		model.addAttribute("subCategory_id",Long.parseLong(request.getParameter("subCategory_id")));
+		
+		/*subCategory.getSubcategory_id());
+		SubCategory subCategory=subCategoryDaoService.getSubCategory(Integer.parseInt(request.getParameter("subcategory")));
+		model.addAttribute("subCategoryId",Integer.parseInt(request.getParameter("subcategory")));
+		*/
+		Vendor vendor=(Vendor) httpSession.getAttribute("vendor");
+		model.addAttribute("vendor_id", vendor.getVendor_id());
 		switch(request.getParameter("subCategory_name")) 
 		{
 		  case "Laptop": model.addAttribute("laptop" ,new Laptop());
@@ -223,4 +229,6 @@ public class HomeController {
 		default: return "subcategory";
 		}
 	}
+	
+	
 }

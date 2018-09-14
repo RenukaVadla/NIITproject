@@ -10,6 +10,7 @@ public interface MobileDao {
 	public abstract boolean addMobile(Mobile mobile);
 	public abstract boolean deleteMobile(Mobile mobile);
 	public abstract Mobile getMobileBySeries(String mobile_series);
+	public Mobile getMobileDetails(long product_id); 
 	//public List<Mobile> getVendorDetails();
 	
 }

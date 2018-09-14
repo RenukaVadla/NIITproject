@@ -16,7 +16,7 @@ public class SubCategoryImp implements SubCategoryDao{
 	@Autowired
 	SessionFactory sessionFactory;
 
-	public SubCategory getCategory(long subcategory_id) {
+	public SubCategory getSubCategory(long subcategory_id) {
 		try {
 		return sessionFactory.getCurrentSession().get(SubCategory.class, subcategory_id);
 		}catch (Exception e) {
@@ -41,4 +41,18 @@ public class SubCategoryImp implements SubCategoryDao{
 		
 	}
 
+	@Override
+	public SubCategory getSubCategoryId(long subcategory_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where subcategory_id=:id",SubCategory.class);
+			query.setParameter("id", subcategory_id);
+			return query.getSingleResult();
+		}catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	
 }

@@ -29,6 +29,9 @@
     	<a class="nav-link" href="category">Add Products</a>
     	<!-- <a class="nav-link" href="subcategory">Add Products</a> -->
     </li>
+     <li class="nav-item">
+    	<a class="nav-link" href="productdetails">View Products</a>
+    </li>
    </ul>
 </body>
 </html>

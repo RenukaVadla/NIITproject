@@ -45,13 +45,28 @@ public class ProductImp implements ProductDao{
 	public List<Product> getAllProducts(long vendor_id) {
 		// TODO Auto-generated method stub
 		try {
-			Query<Product> query=sessionFactory.getCurrentSession().createQuery("from Product where vendor_vendor_id =: id", Product.class);
+			Query<Product> query=sessionFactory.getCurrentSession().createQuery("from Product where vendor_vendor_id =:id", Product.class);
 			query.setParameter("id", vendor_id);
 			return query.getResultList();
 		} catch (Exception e) {
 		e.printStackTrace();
 		return null;
 		}
+	}
+
+	@Override
+	public long getSubCategoryId(long product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<Product> query =sessionFactory.getCurrentSession().createQuery("from Product where subCategory_subcategory_id=:id",Product.class);
+			query.setParameter("id", product_id);
+			Product product=query.getSingleResult();
+			return product.getSubCategory().getSubcategory_id();
+		}catch (Exception e) {
+			// TODO: handle exception
+			return 0;
+		}
+		
 	}
 
 }

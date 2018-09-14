@@ -9,11 +9,11 @@ import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
 
 import ecommerce.model.productdetails.Product;
-
+@Service
 public class ImageUpload {
-	
 	public void saveImage(Product product,HttpServletRequest request)
 	{
 		String contextPath=request.getRealPath("/");

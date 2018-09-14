@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.model.product.Laptop;
+import ecommerce.model.product.Mobile;
 @Component
 @Transactional
 public class LaptopImp implements LaptopDao {
@@ -33,6 +34,15 @@ public class LaptopImp implements LaptopDao {
 			// TODO: handle exception
 		}
 		return false;
+	}
+
+	@Override
+	public Laptop getlaptopDetails(long product_id) {
+		try {
+			return sessionFactory.getCurrentSession().get(Laptop.class,product_id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

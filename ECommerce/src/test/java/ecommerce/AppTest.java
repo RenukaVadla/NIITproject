@@ -142,7 +142,7 @@ public class AppTest
 	{
 		vendorDao.addUser(vendor);
         mobile.setVendor(vendor);
-        subCategory=subCategoryDao.getCategory(1l);
+        subCategory=subCategoryDao.getSubCategory(1L);
   	  
   	  	mobile.setSubCategory(subCategory);
 		assertEquals("failed addMobile()", true, mobileDao.addMobile(mobile));
@@ -155,7 +155,7 @@ public class AppTest
 	{ 
 		vendorDao.addUser(vendor);
 		laptop.setVendor(vendor);
-		subCategory=subCategoryDao.getCategory(1l);
+		subCategory=subCategoryDao.getSubCategory(1L);
 		
 		laptop.setSubCategory(subCategory);
 		assertEquals("addLaptop() testcase failed", true, laptopDao.addLaptop(laptop));
