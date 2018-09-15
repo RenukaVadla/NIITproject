@@ -41,8 +41,8 @@ public class SubCategoryImp implements SubCategoryDao{
 		
 	}
 
-	@Override
-	public SubCategory getSubCategoryId(long subcategory_id) {
+	
+	/*public SubCategory getSubCategoryId(long subcategory_id) {
 		// TODO Auto-generated method stub
 		try {
 			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where subcategory_id=:id",SubCategory.class);
@@ -52,7 +52,7 @@ public class SubCategoryImp implements SubCategoryDao{
 			// TODO: handle exception
 			return null;
 		}
-	}
+	}*/
 
 	
 }

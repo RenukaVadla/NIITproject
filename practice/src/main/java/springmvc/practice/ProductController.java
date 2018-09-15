@@ -52,12 +52,15 @@ public class ProductController {
 	@PostMapping("addmobile")
 	public String addMobile(@ModelAttribute("mobile") Mobile mobile,HttpServletRequest request,HttpSession session)
 	{
+		
+		System.out.println(mobile);
 		List<NoOfProducts> noOfProducts=listOfProducts(mobile);
+		mobile.setNoOfProducts(noOfProducts);
+		
 		Vendor vendor=(Vendor)session.getAttribute("vendor");
 		mobile.setVendor(vendor);
+		
 		mobile.setNoOfProducts(noOfProducts);
-		/*mobileDao.addMobile(mobile);
-		return "redirect:/category";*/
 		if(mobileDao.addMobile(mobile)) {
             
             String contextPath=request.getRealPath("/");

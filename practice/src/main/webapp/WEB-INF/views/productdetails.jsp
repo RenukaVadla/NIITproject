@@ -13,10 +13,6 @@
            	<c:forEach  items="${productList }"  var="vendor">
                <tr>
                       <td><c:out value="${productList.vendor_id }"></c:out></td>
-                      <%-- <td><c:out value="${ productList.product_brand}"></c:out></td>
-                      <td><c:out value="${productList.warrenty }"></c:out></td>
-                      <td><c:out value="${productList.product_price }"></c:out></td>
-                      <td><c:out value="${productList.numberOfProducts }"></c:out> --%>
                </tr>
            </c:forEach>
          </tbody>

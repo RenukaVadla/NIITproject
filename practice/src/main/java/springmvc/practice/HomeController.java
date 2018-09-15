@@ -199,8 +199,6 @@ public class HomeController {
 	@PostMapping("subcategory")
 	public String getSubCategory(@RequestParam("category")long categoryId,Model model) {
 		 
-		System.out.println(subCategoryDao.getSubCategoryDetails(categoryId));
-		System.out.println(categoryId);
 		model.addAttribute("subCategoryList",subCategoryDao.getSubCategoryDetails(categoryId));
 		model.addAttribute("categoryId",categoryDao.getCategoryId(categoryId));
 		return "subcategory";
@@ -209,16 +207,16 @@ public class HomeController {
 	@PostMapping("getmodel")
 	public String  addProducts(HttpServletRequest request,Model model,HttpSession httpSession) {
 		
+		System.out.println(request.getParameter("subCategory_id"));
 		SubCategory subCategory=subCategoryDao.getSubCategory(Long.parseLong(request.getParameter("subCategory_id")));
-		model.addAttribute("subCategory_id",Long.parseLong(request.getParameter("subCategory_id")));
 		
-		/*subCategory.getSubcategory_id());
-		SubCategory subCategory=subCategoryDaoService.getSubCategory(Integer.parseInt(request.getParameter("subcategory")));
-		model.addAttribute("subCategoryId",Integer.parseInt(request.getParameter("subcategory")));
-		*/
-		Vendor vendor=(Vendor) httpSession.getAttribute("vendor");
-		model.addAttribute("vendor_id", vendor.getVendor_id());
-		switch(request.getParameter("subCategory_name")) 
+		model.addAttribute("subCategory_id",subCategory.getSubcategory_id());
+		System.out.println(subCategory.getSubcategory_id());
+		
+		Vendor vendor=(Vendor)httpSession.getAttribute("vendor");
+		model.addAttribute("vendor_id",vendor.getVendor_id());
+		
+		switch(subCategory.getSubCategory_name()) 
 		{
 		  case "Laptop": model.addAttribute("laptop" ,new Laptop());
 		  return "laptop";
