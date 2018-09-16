@@ -58,7 +58,7 @@ public class ProductImp implements ProductDao{
 	public long getSubCategoryId(long product_id) {
 		// TODO Auto-generated method stub
 		try {
-			Query<Product> query =sessionFactory.getCurrentSession().createQuery("from Product where subCategory_subcategory_id=:id",Product.class);
+			Query<Product> query =sessionFactory.getCurrentSession().createQuery("from Product where product_id=:id",Product.class);
 			query.setParameter("id", product_id);
 			Product product=query.getSingleResult();
 			return product.getSubCategory().getSubcategory_id();

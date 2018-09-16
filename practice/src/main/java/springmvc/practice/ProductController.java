@@ -143,9 +143,10 @@ public class ProductController {
 	}
 	@GetMapping("viewproduct/{product_id}")
 	public String viewProducts(@PathVariable("product_id") long product_id, Model model) {
+		System.out.println(productDao.getSubCategoryId(product_id));
 
-		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id))
-				.getSubCategory_name();
+		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id)).getSubCategory_name();
+				/*getSubCategoryId(product_id)).getSubCategory_name();*/
 		System.out.println(name);
 		switch (name) {
 		case "Mobile":
@@ -154,7 +155,7 @@ public class ProductController {
 
 		case "Laptop":
 			model.addAttribute("laptop", laptopDao.getlaptopDetails(product_id));
-			return "laptopspecifications";
+			return "laptopdetails";
 
 		default:
 			return "productdetails";

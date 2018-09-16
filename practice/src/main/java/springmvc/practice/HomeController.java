@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecommerce.daolayer.admin.AdminDao;
+import ecommerce.daolayer.customer.CustomerDao;
 import ecommerce.daolayer.productdetails.CategoryDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.vendor.VendorDao;
+import ecommerce.model.customer.Customer;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
 import ecommerce.model.productdetails.SubCategory;
@@ -41,6 +43,8 @@ public class HomeController {
 	private CategoryDao categoryDao;
 	@Autowired
 	private SubCategoryDao subCategoryDao;
+	@Autowired
+	private CustomerDao customerDao;
 	
 	@RequestMapping("/")
 	public ModelAndView indexPage()
@@ -71,7 +75,6 @@ public class HomeController {
 		model.addAttribute("vendor", new Vendor());
 		return "vendorsignup";
 	}
-	
 	@PostMapping("/vendorsignup")
 	public String addUser(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result)
 	{
@@ -95,11 +98,29 @@ public class HomeController {
 		
 		
 	}
+	@GetMapping("/customer")
+	public String getCustomerSignup(Model model)
+	{
+		model.addAttribute("customer", new Customer());
+		return "customer";
+	}
+	@PostMapping("/customer")
+	public String customerSignUp(@ModelAttribute("customer")Customer customer)
+	{
+		if(customerDao.addCustomer(customer)==true)
+		{
+			return "login";
+		}else
+		{
+			return "customer";
+		}
+	}
+	
 	@GetMapping("/login")
 	public String getUser(Model model)
 	{
 		model.addAttribute("vendor", new Vendor());
-		return "login";
+		return "customerlogin";
 	}
 	
 	@PostMapping("/login")

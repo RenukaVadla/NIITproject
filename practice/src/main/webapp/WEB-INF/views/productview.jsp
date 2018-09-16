@@ -26,15 +26,13 @@
 				<div class="col-md-4">
 					<div class="thumbnail">
 						<img
-							src="<spring:url  value="/resources/resource/products/${product.product_id}.jpg"></spring:url>"
+							src="<spring:url  value='/resources/resource/products/${product.product_id}.jpg'></spring:url>"
 							alt="${product.product_brand }" style="width: 100%" />
 
 						<div class="caption">
 
-							<a href="viewproduct/${product.product_id }"><button
-									class="btn btn-primary">view</button></a> 
-							<a href="editproduct/${product.product_id }"><button
-									class="btn btn-success">Edit</button></a>
+							<a href="viewproduct/${product.product_id }"><button class="btn btn-primary">view</button></a> 
+							<a href="editproduct/${product.product_id }"><button class="btn btn-success">Edit</button></a>
 
 						</div>
 					</div>

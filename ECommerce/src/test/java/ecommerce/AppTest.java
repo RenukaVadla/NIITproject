@@ -12,11 +12,13 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ecommerce.daolayer.admin.AdminDao;
+import ecommerce.daolayer.customer.CustomerDao;
 import ecommerce.daolayer.productdetails.AddressDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.productsDao.MobileDao;
 import ecommerce.daolayer.vendor.VendorDao;
+import ecommerce.model.customer.Customer;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
 import ecommerce.model.productdetails.Address;
@@ -58,7 +60,10 @@ public class AppTest
 	private SubCategoryDao subCategoryDao;
 	@Autowired
 	private SubCategory subCategory;
-	
+	@Autowired
+	private CustomerDao customerDao;
+	@Autowired
+	private Customer customer;
 	
 	
 	@Before
@@ -94,14 +99,27 @@ public class AppTest
 		laptop.setLaptop_storage("32");
 		laptop.setProduct_brand("Dell");
 		laptop.setWarrenty(true);
-		
+	
+		customer.setCustomer_name("renuka");
+		customer.setCustomer_mobile("897654481");
+		customer.setCustomer_email("renuka5l@gmail.com");
+		customer.setCustomer_password("renuka");
 		/*Set<Product> products=new HashSet<Product>();
 		products.add(mobile);
 		products.add(laptop);
 		user.setProduct(products);*/
 		
 	}
-	
+	@Test
+	public void addCustomer()
+	{
+		assertEquals("failed", true, customerDao.addCustomer(customer));
+		deleteCustomer();
+	}
+	public void deleteCustomer()
+	{
+		customerDao.deleteCustomer(customer);
+	}
 	@Test
 	public void usertest()
 	{

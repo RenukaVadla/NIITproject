@@ -32,7 +32,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="vendorsignup">Vendor </a> <a
 							class="dropdown-item" href="#">Admin</a> <a
-							class="dropdown-item" href="#">Customer</a>
+							class="dropdown-item" href="customer">Customer</a>
 					</div></li>
 				 <!-- <li>
     				<a class="nav-link" href="signup">SignUp</a>
