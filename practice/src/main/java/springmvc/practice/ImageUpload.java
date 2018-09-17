@@ -17,12 +17,13 @@ public class ImageUpload {
 	public void saveImage(Product product,HttpServletRequest request)
 	{
 		String contextPath=request.getRealPath("/");
-		FileOutputStream fileOutputStream=null;
 		File file=new File(contextPath+"/resources/resource/products/");
 		if(!file.exists())
 		{
 			file.mkdir();
 		}
+		 System.out.println(file.getPath());
+         FileOutputStream fileOutputStream=null;
 		try {
 			fileOutputStream=new FileOutputStream(file.getPath()+"/"+product.getProduct_id()+".jpg");
 			InputStream inputStream=product.getImage().getInputStream();
@@ -38,6 +39,13 @@ public class ImageUpload {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			 try {
+                 fileOutputStream.close();
+             } catch (IOException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+             }
 		}
         
 		

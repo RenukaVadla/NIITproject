@@ -51,8 +51,9 @@ public class Vendor {
 	@Column(unique=false, nullable=false)
 	private String vendor_password;
 	
-	
 	private boolean status=false;
+	
+	private String role="vendor";
 	
 	@Transient
 	private String cofirmpassword;
@@ -71,6 +72,18 @@ public class Vendor {
 	}
 
 	
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 
 	public long getVendor_id() {
 		return vendor_id;

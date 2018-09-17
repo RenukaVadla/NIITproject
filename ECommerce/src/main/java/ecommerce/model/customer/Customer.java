@@ -18,9 +18,24 @@ public class Customer {
 	private String customer_mobile;
 	private String customer_email;
 	private String customer_password;
+	
+	private String role="customer";
+	private boolean active=true;
 	@Transient
 	private String cofirmpassword;
 	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public String getCofirmpassword() {
 		return cofirmpassword;
 	}

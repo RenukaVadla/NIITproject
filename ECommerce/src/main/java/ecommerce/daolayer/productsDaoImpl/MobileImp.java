@@ -73,6 +73,20 @@ public class MobileImp implements MobileDao
 	}
 
 
+	@Override
+	public boolean editMobile(Mobile mobile) {
+		// TODO Auto-generated method stub
+		try {
+			sessionFactory.getCurrentSession().update(mobile);
+			return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		
+	}
+
+
 	
 
 	

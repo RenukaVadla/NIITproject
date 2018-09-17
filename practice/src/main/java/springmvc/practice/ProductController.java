@@ -41,6 +41,21 @@ public class ProductController {
 	ProductDao productDao;
 	@Autowired
 	SubCategoryDao subcategoryDao;
+	@Autowired
+	private ImageUpload imageUpload;
+	
+	
+	private List<NoOfProducts> listOfProducts(Product product)
+	{
+		List<NoOfProducts> ListOfProducts=new ArrayList<NoOfProducts>();
+		for(int i=1;i<=product.getNumberOfProducts();i++)
+		{
+			NoOfProducts noOfProducts = new NoOfProducts();
+			noOfProducts.setProduct(product);
+			ListOfProducts.add(noOfProducts);
+		}
+		return ListOfProducts;
+	}
 
 	@GetMapping("mobile")
 	public String getMobile(Model model)
@@ -61,76 +76,62 @@ public class ProductController {
 		mobile.setVendor(vendor);
 		
 		mobile.setNoOfProducts(noOfProducts);
-		if(mobileDao.addMobile(mobile)) {
-            
-            String contextPath=request.getRealPath("/");
-            File file=new File(contextPath+"/resources/resource/products/");
-            
-            if(!file.exists())
-            {
-                file.mkdir();
-            }
-            
-            System.out.println(file.getPath());
-            FileOutputStream fileOutputStream=null;
-            InputStream inputStream=null;
-            try {
-                 fileOutputStream=new FileOutputStream(file.getPath()+"/"+mobile.getProduct_id()+".jpg");
-                 inputStream =mobile.getImage().getInputStream();
-                byte[] imageBytes=new byte[inputStream.available()];
-                inputStream.read(imageBytes);
-                
-                fileOutputStream.write(imageBytes);
-                fileOutputStream.flush();        
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }finally {
-                 try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
+		if(mobileDao.addMobile(mobile))
+		{
+            imageUpload.saveImage(mobile, request);
             return "redirect:/category";
 		}
         else{
         	 return "redirect:/subcategory";
             }
-            }
-            
-            
-	
-	
-            
-	private List<NoOfProducts> listOfProducts(Product product)
+     }
+	@GetMapping("/editmobile")
+	public String editprofile(HttpSession httpSession,Model model)
 	{
-		List<NoOfProducts> ListOfProducts=new ArrayList<NoOfProducts>();
-		for(int i=1;i<=product.getNumberOfProducts();i++)
-		{
-			NoOfProducts noOfProducts = new NoOfProducts();
-			noOfProducts.setProduct(product);
-			ListOfProducts.add(noOfProducts);
-		}
-		return ListOfProducts;
+		model.addAttribute("mobile",httpSession.getAttribute("mobile"));
+		return "/editprofile";
 	}
+	
+	
+	@PostMapping("/editmobile")
+	public String editingprofile(@ModelAttribute("mobile") Mobile mobile,HttpSession httpSession,Model model)
+	{
+		mobileDao.editMobile(mobile);
+		httpSession.setAttribute("mobile",mobile);
+		model.addAttribute("mobile",mobile);
+		return "redirect:/mobilespecifications";
+		
+	}
+  
+	
 	@GetMapping("laptop")
 	public String getLaptop(Model model)
 	{
 		model.addAttribute("laptop", new Laptop());
 		return "laptop";
 	}
-	@PostMapping("laptop")
-	public String addLaptop(@ModelAttribute("laptop") Laptop laptop)
+	@PostMapping("addlaptop")
+	public String addLaptop(@ModelAttribute("laptop") Laptop laptop,HttpServletRequest request,HttpSession session)
 	{
 		
-		laptopDao.addLaptop(laptop);
-		return "redirect:/category";
-	}
+		System.out.println(laptop);
+		List<NoOfProducts> noOfProducts=listOfProducts(laptop);
+		laptop.setNoOfProducts(noOfProducts);
+		
+		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		laptop.setVendor(vendor);
+		
+		laptop.setNoOfProducts(noOfProducts);
+		if(laptopDao.addLaptop(laptop))
+		{
+            imageUpload.saveImage(laptop, request);
+            return "redirect:/category";
+		}
+        else{
+        	 return "redirect:/subcategory";
+            }
+     }
+
 	
 	@GetMapping("productdetails")
 	public String getProducts(HttpSession session,Model model,Map<String,Object> products) {

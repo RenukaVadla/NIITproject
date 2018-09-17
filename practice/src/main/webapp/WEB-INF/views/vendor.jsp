@@ -17,7 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-light">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="nav-item active">
       <a class="nav-link" href="profile">Profile</a>
@@ -27,10 +27,12 @@
     </li>
     <li class="nav-item">
     	<a class="nav-link" href="category">Add Products</a>
-    	<!-- <a class="nav-link" href="subcategory">Add Products</a> -->
     </li>
      <li class="nav-item">
     	<a class="nav-link" href="productdetails">View Products</a>
+    </li>
+     <li class="nav-item">
+    	<a class="nav-link" href="/">Home page</a>
     </li>
    </ul>
 </body>

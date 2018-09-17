@@ -15,6 +15,22 @@ public class AdminDetails {
 	private String admin_name;
 	private String admin_email;
 	private String admin_password;
+	private String role="admin";
+	private boolean active=true;
+	
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	public long getAdmin_id() {
 		return admin_id;
 	}

@@ -37,8 +37,17 @@
 				 <!-- <li>
     				<a class="nav-link" href="signup">SignUp</a>
     			</li> -->
-				<li><a class="nav-link" href="login">Login</a></li>
-
+    			<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbardrop"
+					data-toggle="dropdown"> Login As </a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="login">Vendor</a> 
+						<!-- <a
+							class="dropdown-item" href="#">Admin</a> --> <a
+							class="dropdown-item" href="customerlogin">Customer</a>
+					</div></li>
+				<!-- <li><a class="nav-link" href="login">Login</a></li>
+ -->
 				<form class="form-inline" action="search.jsp">
 					<input class="form-control mr sm-2" type="text"
 						placeholder="Search">

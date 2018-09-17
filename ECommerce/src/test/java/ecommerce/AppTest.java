@@ -45,8 +45,8 @@ public class AppTest
 	/*@Autowired
 	private ProductDao productDao;
 	@Autowired
-	private Product product;
-	*/
+	private Product product;*/
+	
 	@Autowired
 	private Mobile mobile;
 	@Autowired
@@ -119,6 +119,25 @@ public class AppTest
 	public void deleteCustomer()
 	{
 		customerDao.deleteCustomer(customer);
+	}
+	@Test
+	public void getCustomerByEmail()
+	{
+		customerDao.addCustomer(customer);
+		String email=customer.getCustomer_email();
+		assertEquals("getCustomerByEmail() failed", customer, customerDao.getCustomerByEmail(email));
+		System.out.println(customer);
+		deleteCustomer();
+	}
+	@Test
+	public void customerLogin()
+	{
+		customerDao.addCustomer(customer);
+		String email=customer.getCustomer_email();
+		String password=customer.getCustomer_password();
+		assertEquals("customerLogin() failed", customer, customerDao.login(email, password));
+		System.out.println(customer);
+		deleteCustomer();
 	}
 	@Test
 	public void usertest()
