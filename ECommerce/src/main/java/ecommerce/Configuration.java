@@ -26,7 +26,7 @@ public class Configuration {
 		
 		
 	}
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource()
 	{
 		BasicDataSource dataSource =new BasicDataSource();

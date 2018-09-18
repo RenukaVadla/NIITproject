@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ecommerce.daolayer.productdetails.ProductDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
@@ -29,6 +30,7 @@ import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
 import ecommerce.model.product.NoOfProducts;
 import ecommerce.model.productdetails.Product;
+import ecommerce.model.productdetails.SubCategory;
 import ecommerce.model.vendor.Vendor;
 
 @Controller
@@ -131,8 +133,6 @@ public class ProductController {
         	 return "redirect:/subcategory";
             }
      }
-
-	
 	@GetMapping("productdetails")
 	public String getProducts(HttpSession session,Model model,Map<String,Object> products) {
 		
@@ -169,8 +169,6 @@ public class ProductController {
 		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id))
 				.getSubCategory_name();
 		
-		
-		
 		switch (name) {
 
 		case "Mobile":
@@ -189,6 +187,11 @@ public class ProductController {
 	}
 
 
-	
 
 }
+
+
+
+	
+
+

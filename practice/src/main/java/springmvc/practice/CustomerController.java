@@ -43,7 +43,8 @@ public class CustomerController {
 		model.addAttribute("customer", new Customer());
 		return "customerlogin";
 	}
-	@PostMapping("/customerlogin")
+	
+	@PostMapping("/customerloginprocess")
 	public String customerLogin(@ModelAttribute("customer") Customer customer,HttpSession httpSession,Model model)
 	{
 		customer=customerDao.login(customer.getCustomer_email(), customer.getCustomer_password());

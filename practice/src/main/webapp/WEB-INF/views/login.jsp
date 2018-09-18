@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="row">
- <spring:form action="loginprocess" type="POST" modelAttribute="vendor">
+ <spring:form action="login" type="POST" modelAttribute="vendor">
  <table>
  <tr>
  	<td><label>Email</label></td>

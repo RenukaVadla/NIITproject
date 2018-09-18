@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="row">
-<spring:form action="customerlogin" type="POST" modelAttribute="customer">
+<spring:form action="customerloginprocess" type="POST" modelAttribute="customer">
 <table>
  <tr>
  	<td><label>Email</label></td>

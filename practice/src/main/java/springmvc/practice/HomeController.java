@@ -35,8 +35,6 @@ import ecommerce.model.vendor.Vendor;
 @Controller
 public class HomeController {
 	
-	
-	
 	@RequestMapping("/")
 	public ModelAndView indexPage()
 	{
@@ -58,5 +56,8 @@ public class HomeController {
 		model.addAttribute("date", new Date());
 		return "aboutus";
 	}
+	
+		
+
 	
 	}
