@@ -24,13 +24,22 @@
 					authentication-failure-url="/adminlogin" />
 					
 			<security:logout logout-success-url="/"/>
+			<!-- <security:form-login 
+			login-page="/login"
+			username-parameter="vendor_email"
+			password-parameter="vendor_password"
+			default-target-url="/"
+			authentication-failure-url="/login"/>
 			
+			<security:logout logout-success-url="/"/>	 -->
     </security:http>
     <security:authentication-manager>
     	<security:authentication-provider>
     		<security:jdbc-user-service data-source-ref="dataSource"
     		users-by-username-query="select admin_email,admin_password from admindetails where admin_email=?"
     		authorities-by-username-query="select role from admindetails where admin_email=?"/>
+    		
+    		
     	</security:authentication-provider>
     </security:authentication-manager>
     

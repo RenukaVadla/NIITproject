@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.vendor.Vendor;
 @Controller
-@RequestMapping("/vendor")
+//@RequestMapping("/vendor")
 public class VendorController {
 	
 	@Autowired
