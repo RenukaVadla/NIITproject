@@ -1,7 +1,8 @@
-<%-- 
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,24 +18,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="row">
- <spring:form action="login" type="POST" modelAttribute="vendor">
+<div id="login-box">
+	<h2>Login with Username and Password</h2>
+		<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+<form name='loginForm'
+		  action="<c:url value='login' />" method='POST'>
  <table>
  <tr>
  	<td><label>Email</label></td>
-	<td><spring:input path="vendor_email"/></td>
+	<td><input path="vendor_email"/></td>
 </tr>
 <tr>
 
 	<td><label>Password</label></td>
-	<td><spring:input path="vendor_password"/></td>
+	<td><input type="password" path="vendor_password"/></td>
+</tr>
+<tr>
+	<td colspan="2"><input type="submit" class="btn" value="Submit"></td>
 </tr>
 </table>
-<tr>
-<td colspan="2"><input type="submit" class="btn" value="Submit"></td>
-<tr> 
-</spring:form> 	
+</form>
 </div>
 </body>
 </html>
- --%>

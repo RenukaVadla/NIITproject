@@ -13,33 +13,47 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
         
    
-     <security:http auto-config="true">
-    	<security:intercept-url pattern="/admin**" access="hasRole('admin')" />
+     <security:http auto-config="true" authentication-manager-ref="adminAuthentication" use-expressions="true" pattern="/admin/**">
+     <security:intercept-url pattern="/admin/**" access="hasRole('admin')" />
 		<security:intercept-url pattern="/" access="anonymous"/>
 			<security:form-login 
-		    		login-page="/adminlogin" 
+		    		login-page="/adminlogin"
 		    		username-parameter="admin_email"
 		    		password-parameter="admin_password"
 		    		default-target-url="/"
 					authentication-failure-url="/adminlogin" />
 					
 			<security:logout logout-success-url="/"/>
-			<!-- <security:form-login 
-			login-page="/login"
-			username-parameter="vendor_email"
-			password-parameter="vendor_password"
-			default-target-url="/"
-			authentication-failure-url="/login"/>
+		<security:csrf disabled="true"/>
 			
-			<security:logout logout-success-url="/"/>	 -->
     </security:http>
-    <security:authentication-manager>
+    <security:authentication-manager id="adminAuthentication">
     	<security:authentication-provider>
     		<security:jdbc-user-service data-source-ref="dataSource"
     		users-by-username-query="select admin_email,admin_password from admindetails where admin_email=?"
     		authorities-by-username-query="select role from admindetails where admin_email=?"/>
-    		
-    		
+    				
+    	</security:authentication-provider>
+    </security:authentication-manager>
+    
+     <security:http auto-config="true" authentication-manager-ref="vendorAuthentication">
+    	<security:intercept-url pattern="/vendor**" access="hasRole('vendor')"/>
+    	<security:form-login 
+		    		login-page="/login" login-processing-url="/login"
+		    		username-parameter="vendor_email"
+		    		password-parameter="vendor_password"
+		    		default-target-url="/vendor"
+					authentication-failure-url="/login" />
+					
+			<security:logout logout-success-url="/"/>
+		<security:csrf disabled="true"/>
+    </security:http>
+    
+    <security:authentication-manager id="vendorAuthentication">
+    	<security:authentication-provider>
+    	<security:jdbc-user-service data-source-ref="dataSource"
+    	users-by-username-query="select vendor_email,vendor_password from vendor where vendor_email=?"
+    	authorities-by-username-query="select role from vendor where vendor_email=?"/>
     	</security:authentication-provider>
     </security:authentication-manager>
     

@@ -45,7 +45,7 @@ public class VendorController {
  			else
  			{
  				vendorDao.addUser(vendor);
- 				return "redirect:/login";
+ 				return "redirect:/vendorlogin";
  				
  			}
  		}else
@@ -59,10 +59,10 @@ public class VendorController {
 	public String getUser(Model model)
 	{
 		model.addAttribute("vendor", new Vendor());
-		return "login";
+		return "vendorlogin";
 	}
 	
-	@PostMapping("/login")
+	/*@PostMapping("/login")
  	public String login(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
  	{
  		System.out.println(vendor.getVendor_email());
@@ -81,7 +81,7 @@ public class VendorController {
  			return "login";
  		}
  	}
-	
+	*/
 	@GetMapping("/userdetails")
 	public String getUserDetails(Map<String, Object> vendor)
 	{
