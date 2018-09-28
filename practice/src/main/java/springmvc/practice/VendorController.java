@@ -80,8 +80,8 @@ public class VendorController {
  		{
  			return "login";
  		}
- 	}
-	*/
+ 	}*/
+	
 	@GetMapping("/userdetails")
 	public String getUserDetails(Map<String, Object> vendor)
 	{

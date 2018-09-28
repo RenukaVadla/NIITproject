@@ -23,17 +23,12 @@ public class AdminController {
  	{ 		
  		return "adminlogin";
  	}
- 	@PostMapping("adminloginprocess")
+ 	@PostMapping("admin/adminloginprocess")
  	public String adminLogin(@ModelAttribute("admin") AdminDetails admin,HttpSession httpSession,Model model)
  	{
- 		if((adminDao.getAdminByEmail(admin.getAdmin_email()))!=null)
- 		{
- 			return "admin";
- 		}else
- 		{
- 			return "index";
- 		}
  		
+ 			return "admin";
+ 
  	}
  	
 

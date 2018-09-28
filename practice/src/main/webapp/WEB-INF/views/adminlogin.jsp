@@ -18,7 +18,7 @@
 			<div class="msg">${msg}</div>
 		</c:if>
 <form name='loginForm'
-		  action="<c:url value='adminloginprocess' />" method='POST'>
+		  action="<c:url value='admin/adminloginprocess' />" method='POST'>
 <table>
 	<tr>
 		<td>Email</td>

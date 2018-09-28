@@ -12,17 +12,15 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
         
-   
-     <security:http auto-config="true" authentication-manager-ref="adminAuthentication" use-expressions="true" pattern="/admin/**">
+    <security:http auto-config="true" authentication-manager-ref="adminAuthentication" use-expressions="true" pattern="/admin/**">
      <security:intercept-url pattern="/admin/**" access="hasRole('admin')" />
 		<security:intercept-url pattern="/" access="anonymous"/>
-			<security:form-login 
+			<security:form-login login-processing-url="/admin/adminloginprocess"
 		    		login-page="/adminlogin"
 		    		username-parameter="admin_email"
 		    		password-parameter="admin_password"
-		    		default-target-url="/"
-					authentication-failure-url="/adminlogin" />
-					
+		    		default-target-url="/admin/admin"
+					authentication-failure-url="/adminlogin" />		
 			<security:logout logout-success-url="/"/>
 		<security:csrf disabled="true"/>
 			
@@ -36,14 +34,14 @@
     	</security:authentication-provider>
     </security:authentication-manager>
     
-     <security:http auto-config="true" authentication-manager-ref="vendorAuthentication">
-    	<security:intercept-url pattern="/vendor**" access="hasRole('vendor')"/>
-    	<security:form-login 
-		    		login-page="/login" login-processing-url="/login"
+     <!-- <security:http auto-config="true" authentication-manager-ref="vendorAuthentication">
+    	<security:intercept-url pattern="/vendor**" access="hasAuthority('vendor')"/>
+    	<security:form-login login-processing-url="login"
+		    		login-page="/vendorlogin" 
 		    		username-parameter="vendor_email"
 		    		password-parameter="vendor_password"
 		    		default-target-url="/vendor"
-					authentication-failure-url="/login" />
+					authentication-failure-url="/vendorlogin" />
 					
 			<security:logout logout-success-url="/"/>
 		<security:csrf disabled="true"/>
@@ -56,5 +54,5 @@
     	authorities-by-username-query="select role from vendor where vendor_email=?"/>
     	</security:authentication-provider>
     </security:authentication-manager>
-    
+     -->
 </beans>
