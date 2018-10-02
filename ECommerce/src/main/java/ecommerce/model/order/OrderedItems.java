@@ -1,10 +1,15 @@
 package ecommerce.model.order;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.stereotype.Component;
+
+@Entity
+@Component
 public class OrderedItems {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -12,8 +17,10 @@ public class OrderedItems {
 	private int quantity;
 	private int unitprice;
 	private int netprice;
+	
 	@ManyToOne()
-	private Order order;
+	private  Orderer order;
+	
 	public int getOrderedItems_id() {
 		return OrderedItems_id;
 	}
@@ -38,10 +45,10 @@ public class OrderedItems {
 	public void setNetprice(int netprice) {
 		this.netprice = netprice;
 	}
-	public Order getOrder() {
+	public  Orderer getOrder() {
 		return order;
 	}
-	public void setOrder(Order order) {
+	public void setOrder( Orderer order) {
 		this.order = order;
 	}
 	

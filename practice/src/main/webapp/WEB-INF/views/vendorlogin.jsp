@@ -27,16 +27,16 @@
 			<div class="msg">${msg}</div>
 		</c:if>
 <form name='loginForm'
-		  action="<c:url value='login' />" method='POST'>
+		  action="vendor/vendorloginprocess"  method='POST'>
  <table>
  <tr>
  	<td><label>Email</label></td>
-	<td><input path="vendor_email"/></td>
+	<td><input type="text" name="vendor_email"/></td>
 </tr>
 <tr>
 
 	<td><label>Password</label></td>
-	<td><input type="password" path="vendor_password"/></td>
+	<td><input type="password" name="vendor_password"/></td>
 </tr>
 <tr>
 	<td colspan="2"><input type="submit" class="btn" value="Submit"></td>

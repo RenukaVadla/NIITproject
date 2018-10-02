@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
+    
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,18 +30,14 @@
     </li>
   </ul>
 </nav>
-<form action="subcategory" method="post">
-       <div class="form-group">
-           <label for="sel1">Categories</label>
-            <select class="form-control " id="category" name="category">
-               <c:forEach items="${categoryList}" var="category">
-               
-               <option value="${category.categoryId }">${category.categoryName }</option>
+<li class="nav-item dropdown"><a
+		class="nav-link dropdown-toggle text-danger" href="#" id="navbardrop"
+		data-toggle="dropdown">Categories</a>
+		<div class="dropdown-menu">
+			<c:forEach items="${categoryList}" var="category">
+				<a class="dropdown-item" href="${contextPath}/vendor/subcategory/${category.categoryId}">${category.categoryName}</a>
+			</c:forEach>
+		</div></li>
 
-               </c:forEach>
-           </select>
-       </div>
-       <input type="submit" class="btn" value="Submit">
-</form>
 </body>
 </html>

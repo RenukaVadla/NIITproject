@@ -1,12 +1,16 @@
 package ecommerce.daoImp.cart;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import ecommerce.daolayer.cart.CartDao;
 import ecommerce.model.cart.Cart;
-
+@Component
+@Transactional
 public class CartImp implements CartDao{
 	@Autowired
 	SessionFactory sessionFactory;
@@ -16,7 +20,7 @@ public class CartImp implements CartDao{
 		// TODO Auto-generated method stub
 		try {
 			sessionFactory.getCurrentSession().save(cart);
-			return true;
+					return true;
 			
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -25,13 +29,13 @@ public class CartImp implements CartDao{
 		}
 		
 	}
-
+	
 	@Override
 	public boolean deletecart(Cart cart) {
 		// TODO Auto-generated method stub
 		try {
 			sessionFactory.getCurrentSession().delete(cart);
-			return true;
+		return true;
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -56,9 +60,9 @@ public class CartImp implements CartDao{
 
 	@Override
 	public Cart getCartById(int cart_id) {
-		// TODO Auto-generated method stub
-		try {
-			Query<Cart> query=sessionFactory.getCurrentSession().createQuery("from Cart where cart_id=:cart_id",Cart.class);
+//		// TODO Auto-generated method stub
+			try {
+		Query<Cart> query=sessionFactory.getCurrentSession().createQuery("from Cart where cart_id=:cart_id",Cart.class);
 			query.setParameter("cart_id", cart_id);
 			return query.getSingleResult();
 			
@@ -72,7 +76,7 @@ public class CartImp implements CartDao{
 
 	@Override
 	public Cart getCartByCustomerId(int customer_id) {
-		// TODO Auto-generated method stub
+//		// TODO Auto-generated method stub		
 		try {
 			Query<Cart> query=sessionFactory.getCurrentSession().createQuery("from Cart where customer_id=:customer_id",Cart.class);
 			query.setParameter("customer_id", customer_id);
@@ -87,3 +91,7 @@ public class CartImp implements CartDao{
 	
 
 }
+
+
+
+	

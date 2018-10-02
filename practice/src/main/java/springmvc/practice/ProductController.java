@@ -102,7 +102,6 @@ public class ProductController {
 		httpSession.setAttribute("mobile",mobile);
 		model.addAttribute("mobile",mobile);
 		return "redirect:/mobilespecifications";
-		
 	}
   
 	
@@ -185,9 +184,7 @@ public class ProductController {
 			return "productdetails";
 		}
 	}
-
-
-
+	
 }
 
 

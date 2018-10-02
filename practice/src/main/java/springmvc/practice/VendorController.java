@@ -1,7 +1,9 @@
 package springmvc.practice;
 
+import java.security.Principal;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,25 +16,44 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import ecommerce.daolayer.productdetails.CategoryDao;
+import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.vendor.VendorDao;
+import ecommerce.model.product.Laptop;
+import ecommerce.model.product.Mobile;
+import ecommerce.model.productdetails.SubCategory;
 import ecommerce.model.vendor.Vendor;
 @Controller
-//@RequestMapping("/vendor")
+
 public class VendorController {
 	
 	@Autowired
 	private VendorDao vendorDao;
+	@Autowired
+	private CategoryDao categoryDao;
+	@Autowired
+	private SubCategoryDao subCategoryDao;
 	
-	@GetMapping("/vendorsignup")
- 	public String getsigup(Model model)
+	
+	/*@GetMapping("/vendorsignup") 
+ 	public String getsigup(Principal principal)
  	{
  		
-		model.addAttribute("vendor", new Vendor());
 		return "vendorsignup";
+	}*/
+	@GetMapping("/vendorlogin")
+	public String getUser(Principal principal)
+	{
+		return "vendorlogin";
 	}
-	
-	@PostMapping("/vendorsignup")
+	@GetMapping("/vendor/vendor")
+	public String vendor()
+	{
+		return "vendor";
+	}
+	@PostMapping("vendor/vendorsignup")
 	public String addUser(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result)
 	{
  		if(!result.hasErrors())
@@ -55,14 +76,15 @@ public class VendorController {
 		
 		
 	}
-	@GetMapping("/login")
+	/*
+	@GetMapping("vendor/vendorlogin")
 	public String getUser(Model model)
 	{
 		model.addAttribute("vendor", new Vendor());
 		return "vendorlogin";
 	}
 	
-	/*@PostMapping("/login")
+	@PostMapping("vendor/vendorlogin")
  	public String login(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
  	{
  		System.out.println(vendor.getVendor_email());
@@ -80,23 +102,26 @@ public class VendorController {
  		{
  			return "login";
  		}
- 	}*/
+ 	}
+	*/
 	
-	@GetMapping("/userdetails")
+	@GetMapping("/vendor/userdetails")
 	public String getUserDetails(Map<String, Object> vendor)
 	{
 		System.out.println(vendorDao.getVendorDetails());
 		vendor.put("vendorList", vendorDao.getVendorDetails());
 		return "userdetails";
 	}
-	@GetMapping("/profile")
-	public String profile() {
-		
-		return "profile";
+	@GetMapping("/vendor/profile")
+	public ModelAndView profile(Principal principal)
+	{
+		ModelAndView modelAndView=new ModelAndView("profile");
+		modelAndView.addObject("vendor", vendorDao.getUserByEmail(principal.getName()));
+		return modelAndView;
 	}
 	
 	
-	@GetMapping("/editprofile")
+	@GetMapping("/vendor/editprofile")
 	public String editprofile(HttpSession httpSession,Model model)
 	{
 		model.addAttribute("vendor",httpSession.getAttribute("vendor"));
@@ -104,16 +129,56 @@ public class VendorController {
 	}
 	
 	
-	@PostMapping("/editprofile")
+	@PostMapping("/vendor/editprofile")
 	public String editingprofile(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
 	{
 		vendorDao.update(vendor);
 		httpSession.setAttribute("vendor", vendor);
 		model.addAttribute("vendor", vendor);
-		return "redirect:/profile";
+		return "redirect:/vendor/profile";
 		
 	}
+	@GetMapping("vendor/category")
+	public String getCategories(Map<String, Object> category) {
+		category.put("categoryList", categoryDao.getCategoryDetails());
+
+		return "category";
+	}
 	
+	@GetMapping("vendor/subcategory/{categoryId}")
+	public String getSubCategory(@PathVariable("categoryId") int categoryId, Model model) {
+
+		model.addAttribute("subCategoryList", subCategoryDao.getSubCategoryDetails(categoryId));
+		model.addAttribute("categoryName", categoryDao.getCategoryId(categoryId));
+		return "subcategory";
+
+	}
+	@PostMapping("vendor/getModel")
+	public String addProducts(HttpServletRequest request, Model model, HttpSession session) {
+
+		SubCategory subCategory = subCategoryDao.getSubCategory(Long.parseLong(request.getParameter("subCategory_id")));
+		model.addAttribute("subCategory_id", subCategory.getSubcategory_id());
+
+		
+		switch (subCategory.getSubCategory_name())
+		{
+		
+		case "Laptop":
+
+			model.addAttribute("laptop", new Laptop());
+
+			return "laptop";
+
+		case "Mobile":
+			model.addAttribute("mobile", new Mobile());
+			return "mobile";
+			
+		default:
+			return "subcategory";
+			
+		}
+	}
+	/*
 	@GetMapping("accept/{vendor_id}")
 	public String activate(@PathVariable("vendor_id") long vendor_id)
 	{
@@ -133,5 +198,6 @@ public class VendorController {
 	}
 	
 	
+*/
 
 }

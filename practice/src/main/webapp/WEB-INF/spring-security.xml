@@ -11,12 +11,13 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
-        
-    <security:http auto-config="true" authentication-manager-ref="adminAuthentication" use-expressions="true" pattern="/admin/**">
-     <security:intercept-url pattern="/admin/**" access="hasRole('admin')" />
-		<security:intercept-url pattern="/" access="anonymous"/>
-			<security:form-login login-processing-url="/admin/adminloginprocess"
+     
+     <bean id="noOpPasswordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"></bean>
+	   <security:http auto-config="true" authentication-manager-ref="adminAuthentication" use-expressions="true" pattern="/admin/**">
+		<security:intercept-url pattern="/" access="hasAuthority('admin')"/>
+			<security:form-login 
 		    		login-page="/adminlogin"
+		    		login-processing-url="/admin/adminloginprocess"
 		    		username-parameter="admin_email"
 		    		password-parameter="admin_password"
 		    		default-target-url="/admin/admin"
@@ -27,20 +28,22 @@
     </security:http>
     <security:authentication-manager id="adminAuthentication">
     	<security:authentication-provider>
+    	<security:password-encoder
+				ref="noOpPasswordEncoder"></security:password-encoder>
     		<security:jdbc-user-service data-source-ref="dataSource"
-    		users-by-username-query="select admin_email,admin_password from admindetails where admin_email=?"
-    		authorities-by-username-query="select role from admindetails where admin_email=?"/>
+    		users-by-username-query="select admin_email,admin_password,active from admindetails where admin_email=?"
+    		authorities-by-username-query="select admin_email, role from admindetails where admin_email=?"/>
     				
     	</security:authentication-provider>
     </security:authentication-manager>
     
-     <!-- <security:http auto-config="true" authentication-manager-ref="vendorAuthentication">
-    	<security:intercept-url pattern="/vendor**" access="hasAuthority('vendor')"/>
-    	<security:form-login login-processing-url="login"
+     <security:http auto-config="true" authentication-manager-ref="vendorAuthentication" use-expressions="true" pattern="/vendor/**">
+    	<security:intercept-url pattern="/" access="hasAuthority('vendor')"/>
+    	<security:form-login login-processing-url="/vendor/vendorloginprocess"
 		    		login-page="/vendorlogin" 
 		    		username-parameter="vendor_email"
 		    		password-parameter="vendor_password"
-		    		default-target-url="/vendor"
+		    		default-target-url="/vendor/vendor"
 					authentication-failure-url="/vendorlogin" />
 					
 			<security:logout logout-success-url="/"/>
@@ -49,10 +52,18 @@
     
     <security:authentication-manager id="vendorAuthentication">
     	<security:authentication-provider>
+    	<security:password-encoder
+				ref="noOpPasswordEncoder"></security:password-encoder>
     	<security:jdbc-user-service data-source-ref="dataSource"
-    	users-by-username-query="select vendor_email,vendor_password from vendor where vendor_email=?"
-    	authorities-by-username-query="select role from vendor where vendor_email=?"/>
+    	users-by-username-query="select vendor_email,vendor_password,status from vendor where vendor_email=?"
+    	authorities-by-username-query="select vendor_email, role from vendor where vendor_email=?"/>
     	</security:authentication-provider>
     </security:authentication-manager>
-     -->
+    
+    <!-- <security:http auto-config="true" authentication-manager-ref="customerAuthentication" use-expressions="true" pattern="/customer/**">
+    	<security:intercept-url pattern="/" access="hasAuthority('customer')"/>
+    		<security:form-login login-page="/customerlogin"
+    		login-processing-url="/customer/customerloginprocess"/>
+    </security:http> -->
+    
 </beans>

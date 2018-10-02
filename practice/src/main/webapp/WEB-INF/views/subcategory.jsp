@@ -18,6 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <!-- <li class="nav-item">
@@ -31,7 +32,7 @@
     </li>
   </ul>
   </nav>
-<form action="getmodel" method="post">
+<form action="${contextPath}/vendor/getModel" method="post">
 				<div class="form-group">
 					<label for="sel1">SubCategories</label> 
 					<select class="form-control" id="sel1"  name="subCategory_id">

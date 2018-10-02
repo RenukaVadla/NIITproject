@@ -22,10 +22,9 @@ public class Configuration {
 		LocalSessionFactoryBuilder localSessionFactoryBuilder=new LocalSessionFactoryBuilder(getDataSource());
 		localSessionFactoryBuilder.addProperties(getProperties());
 		localSessionFactoryBuilder.scanPackages("ecommerce");
-		return localSessionFactoryBuilder.buildSessionFactory();
-		
-		
+		return localSessionFactoryBuilder.buildSessionFactory();	
 	}
+	
 	@Bean("dataSource")
 	public DataSource getDataSource()
 	{

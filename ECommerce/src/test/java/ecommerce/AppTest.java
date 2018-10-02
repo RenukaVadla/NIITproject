@@ -12,12 +12,14 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ecommerce.daolayer.admin.AdminDao;
+import ecommerce.daolayer.cart.CartDao;
 import ecommerce.daolayer.customer.CustomerDao;
 import ecommerce.daolayer.productdetails.AddressDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.productsDao.MobileDao;
 import ecommerce.daolayer.vendor.VendorDao;
+import ecommerce.model.cart.Cart;
 import ecommerce.model.customer.Customer;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
@@ -64,7 +66,10 @@ public class AppTest
 	private CustomerDao customerDao;
 	@Autowired
 	private Customer customer;
-	
+	@Autowired
+	private CartDao cartDao;
+	@Autowired
+	private Cart cart;
 	
 	@Before
 	public void setUp()
@@ -110,6 +115,7 @@ public class AppTest
 		user.setProduct(products);*/
 		
 	}
+	
 	@Test
 	public void addCustomer()
 	{
@@ -139,6 +145,8 @@ public class AppTest
 		System.out.println(customer);
 		deleteCustomer();
 	}
+	
+	/*
 	@Test
 	public void usertest()
 	{
@@ -261,4 +269,5 @@ public class AppTest
 	}
 
 
+*/	
 	}

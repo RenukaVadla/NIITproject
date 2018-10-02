@@ -6,14 +6,15 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ecommerce.daolayer.order.OrderDao;
-import ecommerce.model.order.Order;
+
+import ecommerce.model.order.Orderer;
 
 public class OrderImp implements OrderDao{
 	@Autowired
 	SessionFactory sessionFactory;
 	
 	@Override
-	public boolean addOrder(Order order) {
+	public boolean addOrder( Orderer order) {
 		// TODO Auto-generated method stub
 		try {
 			sessionFactory.getCurrentSession().save(order);
@@ -26,7 +27,7 @@ public class OrderImp implements OrderDao{
 	}
 
 	@Override
-	public boolean deleteOrder(Order order) {
+	public boolean deleteOrder( Orderer order) {
 		// TODO Auto-generated method stub
 		try {
 			sessionFactory.getCurrentSession().delete(order);
@@ -40,7 +41,7 @@ public class OrderImp implements OrderDao{
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
+	public boolean updateOrder( Orderer order) {
 		// TODO Auto-generated method stub
 		try {
 			sessionFactory.getCurrentSession().update(order);
@@ -51,13 +52,13 @@ public class OrderImp implements OrderDao{
 	}
 
 	@Override
-	public Order getOrderByOrderId(int order_id) {
+	public  Orderer getOrderByOrderId(int order_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Order> getOrderByCustomerId(int customer_id) {
+	public List< Orderer> getOrderByCustomerId(int customer_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

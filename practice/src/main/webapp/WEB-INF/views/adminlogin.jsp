@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="login-box">
-	<h2>Login with Username and Password</h2>
+	<h2>Login with Adminname and Password</h2>
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
@@ -18,15 +18,15 @@
 			<div class="msg">${msg}</div>
 		</c:if>
 <form name='loginForm'
-		  action="<c:url value='admin/adminloginprocess' />" method='POST'>
+		  action="admin/adminloginprocess" method='POST'>
 <table>
 	<tr>
 		<td>Email</td>
-		<td><input path="admin_email"/></td>
+		<td><input type="text" name="admin_email"/></td>
 	</tr>
 	<tr>
 		<td>Password</td>
-		<td><input type="password" path="admin_password"/></td>
+		<td><input type="password" name="admin_password"/></td>
 	</tr>
 	<tr>
 		<td colspan='2'><input name="submit" type="submit"

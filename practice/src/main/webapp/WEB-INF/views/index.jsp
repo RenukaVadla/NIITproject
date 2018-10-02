@@ -42,7 +42,7 @@
 					class="nav-link dropdown-toggle" href="#" id="navbardrop"
 					data-toggle="dropdown"> Login As </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="login">Vendor</a> 
+						<a class="dropdown-item" href="vendorlogin">Vendor</a> 
 						<a class="dropdown-item" href="adminlogin">Admin</a> <a
 							class="dropdown-item" href="customerlogin">Customer</a>
 					</div></li>
@@ -125,5 +125,5 @@ width:100%;
 
 </style>
 
-}
+
 

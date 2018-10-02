@@ -1,5 +1,7 @@
 package ecommerce.daoImp.admin;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,19 @@ public class AdminImp implements AdminDao {
 				return null;
 			}
 
+	}
+
+	@Override
+	public List<Vendor> getVendor() {
+		// TODO Auto-generated method stub
+		try {
+			Query<Vendor> query=sessionFactory.getCurrentSession().createQuery("from Vendor",Vendor.class);
+			return query.getResultList();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

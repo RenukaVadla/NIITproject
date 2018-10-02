@@ -1,4 +1,4 @@
-package ecommerce.model.cart;
+package ecommerce.model.order;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,19 +12,19 @@ import org.springframework.stereotype.Component;
 import ecommerce.model.product.NoOfProducts;
 @Entity
 @Component
-public class CartItemId {
+public class OrdererItemIds {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long cartItemId_id;
+	private int orderedItemId_id;
 	@OneToOne
 	private NoOfProducts noOfProducts;
 	@ManyToOne
-	private CartItem cartItem;
-	public long getCartItemId_id() {
-		return cartItemId_id;
+	private OrderedItems orderedItems;
+	public int getOrderedItemId_id() {
+		return orderedItemId_id;
 	}
-	public void setCartItemId_id(long cartItemId_id) {
-		this.cartItemId_id = cartItemId_id;
+	public void setOrderedItemId_id(int orderedItemId_id) {
+		this.orderedItemId_id = orderedItemId_id;
 	}
 	public NoOfProducts getNoOfProducts() {
 		return noOfProducts;
@@ -32,11 +32,12 @@ public class CartItemId {
 	public void setNoOfProducts(NoOfProducts noOfProducts) {
 		this.noOfProducts = noOfProducts;
 	}
-	public CartItem getCartItem() {
-		return cartItem;
+	public OrderedItems getOrderedItems() {
+		return orderedItems;
 	}
-	public void setCartItem(CartItem cartItem) {
-		this.cartItem = cartItem;
+	public void setOrderedItems(OrderedItems orderedItems) {
+		this.orderedItems = orderedItems;
 	}
+	
 	
 }

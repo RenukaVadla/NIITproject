@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,16 +18,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a class="nav-link" href="profile">Profile</a>
+      <a class="nav-link" href="${contextPath }/admin/adminprofile">Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="editprofile">Edit Profile</a>
+      <a class="nav-link" href="admin/editprofile">Edit Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="userdetails">Vendor</a>
+      <a class="nav-link" href="${contextPath }/admin/userdetails">Vendor</a>
     </li>
   </ul>
 </nav>

@@ -40,6 +40,20 @@ public class CategoryImp implements CategoryDao {
 		}
 		
 	}
+
+	@Override
+	public Category getCategoryId(int categoryId) {
+		// TODO Auto-generated method stub
+		try {
+		Query<Category> query=sessionFactory.getCurrentSession().createQuery("from Category where categoryId=:categoryId",Category.class);
+		query.setParameter("categoryId", categoryId);
+		return query.getSingleResult();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
 }
