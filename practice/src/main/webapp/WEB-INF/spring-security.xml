@@ -60,10 +60,25 @@
     	</security:authentication-provider>
     </security:authentication-manager>
     
-    <!-- <security:http auto-config="true" authentication-manager-ref="customerAuthentication" use-expressions="true" pattern="/customer/**">
+    <security:http auto-config="true" authentication-manager-ref="customerAuthentication" use-expressions="true" pattern="/customer/**">
     	<security:intercept-url pattern="/" access="hasAuthority('customer')"/>
     		<security:form-login login-page="/customerlogin"
-    		login-processing-url="/customer/customerloginprocess"/>
-    </security:http> -->
+    		login-processing-url="/customer/customerloginprocess"
+    		username-parameter="customer_email"
+    		password-parameter="customer_password"
+    		default-target-url="/customer/customerindex"
+    		authentication-failure-url="/customerlogin"/>
+    	<security:logout logout-success-url="/"/>
+    	<security:csrf disabled="true"/>
+    </security:http>
+    
+    <security:authentication-manager id="customerAuthentication">
+    <security:authentication-provider>
+    <security:password-encoder  ref="noOpPasswordEncoder"></security:password-encoder>
+    <security:jdbc-user-service data-source-ref="dataSource"
+    	users-by-username-query="select customer_email,customer_password,active from customer where customer_email=?"
+    	authorities-by-username-query="select customer_email, role from customer where customer_email=?"/>
+	 </security:authentication-provider>
+    </security:authentication-manager>
     
 </beans>

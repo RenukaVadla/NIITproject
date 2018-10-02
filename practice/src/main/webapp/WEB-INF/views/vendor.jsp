@@ -36,5 +36,6 @@
     	<a class="nav-link" href="/">Home page</a>
     </li>
    </ul>
+ </nav>
 </body>
 </html>

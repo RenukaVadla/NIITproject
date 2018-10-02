@@ -1,5 +1,7 @@
 package springmvc.practice;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ecommerce.daolayer.customer.CustomerDao;
 import ecommerce.model.customer.Customer;
 @Controller
-@RequestMapping("/customer")
 public class CustomerController {
 	@Autowired
 	private CustomerDao customerDao;
@@ -38,26 +39,16 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customerlogin")
-	public String getcustomerLogin(Model model)
+	public String getcustomerLogin(Principal principal)
 	{
-		model.addAttribute("customer", new Customer());
 		return "customerlogin";
 	}
 	
-	@PostMapping("/customerloginprocess")
-	public String customerLogin(@ModelAttribute("customer") Customer customer,HttpSession httpSession,Model model)
+	@GetMapping("customer/customerindex")
+	public String customerLogin()
 	{
-		customer=customerDao.login(customer.getCustomer_email(), customer.getCustomer_password());
-		if(customer!=null)
-		{
-			httpSession.setAttribute("customer", customer);
-		    model.addAttribute("customer", customer);
-			return "customerlogin";
-		}
-		else
-		{
-			return "customer";
-		}
+		
+			return "customerIndex";
 	}
 
 }
