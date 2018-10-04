@@ -30,7 +30,7 @@
     	<a class="nav-link" href="${contextPath }/vendor/category">Add Products</a>
     </li>
      <li class="nav-item">
-    	<a class="nav-link" href="productdetails">View Products</a>
+    	<a class="nav-link" href="${contextPath }/vendor/productdetails">View Products</a>
     </li>
      <li class="nav-item">
     	<a class="nav-link" href="/">Home page</a>

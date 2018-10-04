@@ -34,11 +34,14 @@ import ecommerce.model.vendor.Vendor;
 
 @Controller
 public class HomeController {
+	@Autowired
+	SubCategoryDao subCategoryDao;
 	
 	@RequestMapping("/")
-	public ModelAndView indexPage()
+	public ModelAndView indexPage(HttpSession session)
 	{
 		ModelAndView view =new ModelAndView("index");
+		session.setAttribute("electronics", subCategoryDao.getElectornic());
 		return view;
 	}
 	@RequestMapping("/contact")
@@ -56,8 +59,5 @@ public class HomeController {
 		model.addAttribute("date", new Date());
 		return "aboutus";
 	}
-	
-		
-
 	
 	}

@@ -38,7 +38,8 @@
     </security:authentication-manager>
     
      <security:http auto-config="true" authentication-manager-ref="vendorAuthentication" use-expressions="true" pattern="/vendor/**">
-    	<security:intercept-url pattern="/" access="hasAuthority('vendor')"/>
+    	<security:intercept-url pattern="/vendor/**" access="hasAuthority('vendor')"/>
+    	<security:intercept-url pattern="/vendor/vendorloginprocess" access="anonymous"/>
     	<security:form-login login-processing-url="/vendor/vendorloginprocess"
 		    		login-page="/vendorlogin" 
 		    		username-parameter="vendor_email"

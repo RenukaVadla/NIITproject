@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import ecommerce.daolayer.productdetails.ProductDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.productsDao.LaptopDao;
 import ecommerce.daolayer.productsDao.MobileDao;
+import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.product.Laptop;
 import ecommerce.model.product.Mobile;
 import ecommerce.model.product.NoOfProducts;
@@ -43,6 +45,8 @@ public class ProductController {
 	ProductDao productDao;
 	@Autowired
 	SubCategoryDao subcategoryDao;
+	@Autowired
+	VendorDao vendorDao;
 	@Autowired
 	private ImageUpload imageUpload;
 	
@@ -66,28 +70,30 @@ public class ProductController {
 		return "mobile";
 	}
 	
-	@PostMapping("addmobile")
-	public String addMobile(@ModelAttribute("mobile") Mobile mobile,HttpServletRequest request,HttpSession session)
+	@PostMapping("/vendor/addmobile")
+	public String addMobile(@ModelAttribute("mobile") Mobile mobile,HttpServletRequest request,HttpSession session,Principal principal)
 	{
 		
 		System.out.println(mobile);
 		List<NoOfProducts> noOfProducts=listOfProducts(mobile);
 		mobile.setNoOfProducts(noOfProducts);
 		
-		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		/*Vendor vendor=(Vendor)session.getAttribute("vendor");*/
+		Vendor vendor=vendorDao.getUserByEmail(principal.getName());
+		System.out.println(vendor);
 		mobile.setVendor(vendor);
 		
 		mobile.setNoOfProducts(noOfProducts);
 		if(mobileDao.addMobile(mobile))
 		{
             imageUpload.saveImage(mobile, request);
-            return "redirect:/category";
+            return "redirect:/vendor/category";
 		}
         else{
         	 return "redirect:/subcategory";
             }
      }
-	@GetMapping("/editmobile")
+	@GetMapping("/vendor/editmobile")
 	public String editprofile(HttpSession httpSession,Model model)
 	{
 		model.addAttribute("mobile",httpSession.getAttribute("mobile"));
@@ -95,7 +101,7 @@ public class ProductController {
 	}
 	
 	
-	@PostMapping("/editmobile")
+	@PostMapping("/vendor/editmobile")
 	public String editingprofile(@ModelAttribute("mobile") Mobile mobile,HttpSession httpSession,Model model)
 	{
 		mobileDao.editMobile(mobile);
@@ -105,13 +111,13 @@ public class ProductController {
 	}
   
 	
-	@GetMapping("laptop")
+	@GetMapping("/vendor/laptop")
 	public String getLaptop(Model model)
 	{
 		model.addAttribute("laptop", new Laptop());
 		return "laptop";
 	}
-	@PostMapping("addlaptop")
+	@PostMapping("/vedor/addlaptop")
 	public String addLaptop(@ModelAttribute("laptop") Laptop laptop,HttpServletRequest request,HttpSession session)
 	{
 		
@@ -132,7 +138,7 @@ public class ProductController {
         	 return "redirect:/subcategory";
             }
      }
-	@GetMapping("productdetails")
+	/*@GetMapping("productdetails")
 	public String getProducts(HttpSession session,Model model,Map<String,Object> products) {
 		
 		Vendor vendor=(Vendor)session.getAttribute("vendor");
@@ -140,13 +146,13 @@ public class ProductController {
 		System.out.println(vendor.getVendor_id());
 		products.put("productList", productDao.getAllProducts(vendor.getVendor_id()));
 		return "productview";	
-	}
-	@GetMapping("viewproduct/{product_id}")
+	}*/
+	@GetMapping("vendor/viewproduct/{product_id}")
 	public String viewProducts(@PathVariable("product_id") long product_id, Model model) {
 		System.out.println(productDao.getSubCategoryId(product_id));
 
 		String name = subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id)).getSubCategory_name();
-				/*getSubCategoryId(product_id)).getSubCategory_name();*/
+				
 		System.out.println(name);
 		switch (name) {
 		case "Mobile":
@@ -183,6 +189,17 @@ public class ProductController {
 		default:
 			return "productdetails";
 		}
+	}
+	
+	
+	@GetMapping("products/{subcategory_id}")
+	public String getProducts(@PathVariable("subcategory_id")long subcategory_id,Map<String,Object> products)
+	{
+		
+		products.put("productList",productDao.getProductBySubCategory_id(subcategory_id));
+		
+		
+		return "products";
 	}
 	
 }

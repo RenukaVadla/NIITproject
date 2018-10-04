@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ecommerce.daolayer.productdetails.ProductDao;
 import ecommerce.model.productdetails.Product;
+import ecommerce.model.productdetails.SubCategory;
 
 @Component
 @Transactional
@@ -67,6 +68,18 @@ public class ProductImp implements ProductDao{
 			return 0;
 		}
 		
+	}
+
+	@Override
+	public List<Product> getProductBySubCategory_id(long subcategory_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<Product> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where subCategory_subcategory_id=1",Product.class);
+			return query.getResultList();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }

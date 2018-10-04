@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ecommerce.daolayer.productdetails.CategoryDao;
+import ecommerce.daolayer.productdetails.ProductDao;
 import ecommerce.daolayer.productdetails.SubCategoryDao;
 import ecommerce.daolayer.vendor.VendorDao;
 import ecommerce.model.product.Laptop;
@@ -35,7 +36,8 @@ public class VendorController {
 	private CategoryDao categoryDao;
 	@Autowired
 	private SubCategoryDao subCategoryDao;
-	
+	@Autowired
+	private ProductDao productDao;
 	
 	/*@GetMapping("/vendorsignup") 
  	public String getsigup(Principal principal)
@@ -76,42 +78,7 @@ public class VendorController {
 		
 		
 	}
-	/*
-	@GetMapping("vendor/vendorlogin")
-	public String getUser(Model model)
-	{
-		model.addAttribute("vendor", new Vendor());
-		return "vendorlogin";
-	}
 	
-	@PostMapping("vendor/vendorlogin")
- 	public String login(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
- 	{
- 		System.out.println(vendor.getVendor_email());
- 		System.out.println(vendor.getVendor_password());
- 		vendor= vendorDao.login(vendor.getVendor_email(), vendor.getVendor_password());
- 		if(vendor!= null)
- 		{
- 			System.out.println(vendor);
- 			httpSession.setAttribute("vendor", vendor);
- 		    model.addAttribute("vendor", vendor);
- 		    return "vendor";
- 		 }
- 			
- 		else
- 		{
- 			return "login";
- 		}
- 	}
-	*/
-	
-	@GetMapping("/vendor/userdetails")
-	public String getUserDetails(Map<String, Object> vendor)
-	{
-		System.out.println(vendorDao.getVendorDetails());
-		vendor.put("vendorList", vendorDao.getVendorDetails());
-		return "userdetails";
-	}
 	@GetMapping("/vendor/profile")
 	public ModelAndView profile(Principal principal)
 	{
@@ -178,6 +145,23 @@ public class VendorController {
 			
 		}
 	}
+	@GetMapping("/vendor/userdetails")
+	public String getUserDetails(Map<String, Object> vendor)
+	{
+		System.out.println(vendorDao.getVendorDetails());
+		vendor.put("vendorList", vendorDao.getVendorDetails());
+		return "userdetails";
+	}
+	@GetMapping("/vendor/productdetails")
+	public String getProducts(Principal principal,Map<String,Object> products) {
+		
+		/*Vendor vendor=(Vendor)session.getAttribute("vendor");*/
+		Vendor vendor= vendorDao.getUserByEmail(principal.getName());
+		System.out.println(vendor);
+		System.out.println(vendor.getVendor_id());
+		products.put("productList", productDao.getAllProducts(vendor.getVendor_id()));
+		return "productview";	
+	}
 	/*
 	@GetMapping("accept/{vendor_id}")
 	public String activate(@PathVariable("vendor_id") long vendor_id)
@@ -198,6 +182,34 @@ public class VendorController {
 	}
 	
 	
-*/
-
+/*
+	@GetMapping("vendor/vendorlogin")
+	public String getUser(Model model)
+	{
+		model.addAttribute("vendor", new Vendor());
+		return "vendorlogin";
+	}
+	
+	@PostMapping("vendor/vendorlogin")
+ 	public String login(@ModelAttribute("vendor") Vendor vendor,HttpSession httpSession,Model model)
+ 	{
+ 		System.out.println(vendor.getVendor_email());
+ 		System.out.println(vendor.getVendor_password());
+ 		vendor= vendorDao.login(vendor.getVendor_email(), vendor.getVendor_password());
+ 		if(vendor!= null)
+ 		{
+ 			System.out.println(vendor);
+ 			httpSession.setAttribute("vendor", vendor);
+ 		    model.addAttribute("vendor", vendor);
+ 		    return "vendor";
+ 		 }
+ 			
+ 		else
+ 		{
+ 			return "login";
+ 		}
+ 	}
+	*/
+	
+	
 }

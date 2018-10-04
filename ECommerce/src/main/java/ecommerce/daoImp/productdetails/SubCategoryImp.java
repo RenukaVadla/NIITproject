@@ -41,6 +41,19 @@ public class SubCategoryImp implements SubCategoryDao{
 		
 	}
 
+	@Override
+	public List<SubCategory> getElectornic() {
+		// TODO Auto-generated method stub
+		try {
+			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where category_categoryId=1", SubCategory.class);
+			return query.getResultList();
+					}catch (Exception e) {
+			// TODO: handle exception
+						e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	/*public SubCategory getSubCategoryId(long subcategory_id) {
 		// TODO Auto-generated method stub

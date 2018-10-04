@@ -1,6 +1,8 @@
 <%@page isELIgnored="false"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <spring:url value="/resource/resource/" var="image"></spring:url>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
 <html>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -18,20 +20,20 @@
 			<ul class="nav nav-tabs">
 				<li><a class="navbar-brand" href="#" id="text"><p class="font-weight-bold">E-Commerce.</p></a></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbardrop"
-					data-toggle="dropdown" font-color:red> Gadgets </a>
+					class="nav-link dropdown-toggle  text-dark" href="#"
+					id="navbardrop" data-toggle="dropdown"> Electronics </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">MOBILE </a> <a
-							class="dropdown-item" href="#">LAPTOP </a>
-							
+						<c:forEach items="${electronics}" var="electronics">
+							<a class="dropdown-item"
+								href="${contextPath}/products/${electronics.subcategory_id}">${electronics.subCategory_name}</a>
+						</c:forEach>
 					</div></li>
-				
 				<li>
 					<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbardrop"
 					data-toggle="dropdown"> SignUp As </a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="vendorsignup">Vendor </a> <a
+							<a class="dropdown-item text-dark" href="vendorsignup">Vendor </a> <a
 								class="dropdown-item" href="#">Admin</a> <a
 								class="dropdown-item" href="customer">Customer</a>
 						</div>
