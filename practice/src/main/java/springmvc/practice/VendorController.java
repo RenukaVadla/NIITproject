@@ -39,12 +39,12 @@ public class VendorController {
 	@Autowired
 	private ProductDao productDao;
 	
-	/*@GetMapping("/vendorsignup") 
- 	public String getsigup(Principal principal)
+	@GetMapping("/vendorsignup") 
+ 	public String getsigup(Model model)
  	{
- 		
+ 		model.addAttribute("vendor", new Vendor());
 		return "vendorsignup";
-	}*/
+	}
 	@GetMapping("/vendorlogin")
 	public String getUser(Principal principal)
 	{
@@ -55,7 +55,7 @@ public class VendorController {
 	{
 		return "vendor";
 	}
-	@PostMapping("vendor/vendorsignup")
+	@PostMapping("/vendorsignup")
 	public String addUser(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result)
 	{
  		if(!result.hasErrors())

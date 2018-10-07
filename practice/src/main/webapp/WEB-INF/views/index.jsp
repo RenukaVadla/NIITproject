@@ -1,6 +1,7 @@
 <%@page isELIgnored="false"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<spring:url value="/resource/resource/" var="image"></spring:url>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url value="/resource/resource/" var="image"></c:url>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
 <html>
@@ -35,7 +36,7 @@
 						<div class="dropdown-menu">
 							<a class="dropdown-item text-dark" href="vendorsignup">Vendor </a> <a
 								class="dropdown-item" href="#">Admin</a> <a
-								class="dropdown-item" href="customer">Customer</a>
+								class="dropdown-item" href="customersignup">Customer</a>
 						</div>
 					</li>
 				
@@ -69,21 +70,21 @@
 		<div class="container">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img class="d-block w-100" src="${image}/image1.jpg" alt="First slide" class="dimensions">
+				<img class="d-block w-100" src="${image}image1.jpg" alt="First slide" class="dimensions">
 					<div class="carousel-caption">
     					<h3>Shopping</h3>
     						<p>Great time</p>
   					</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="${image}/mobile2.jpeg" alt="Second slide" class="dimensions">
+				<img class="d-block w-100" src="${image}mobile2.jpeg" alt="Second slide" class="dimensions">
 				<div class="carousel-caption">
     				<h3>Mobile</h3>
     				<p>World in your hands!!!!!!!</p>
   				</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="${image}/laptop1.jpeg" alt="Third slide" class="dimensions">
+				<img class="d-block w-100" src="${image}laptop1.jpeg" alt="Third slide" class="dimensions">
 				<div class="carousel-caption">
     				<h3>Work</h3>
     				<p>Enjoy</p>

@@ -10,5 +10,5 @@ public interface ProductDao {
 	public List<Product> getAllProducts(long vendor_id);
 	public long getSubCategoryId(long product_id);
 	public List<Product> getProductBySubCategory_id(long subcategory_id);
-
+	public Product getProduct(long product_id);
 }

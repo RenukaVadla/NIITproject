@@ -41,9 +41,10 @@ public class HomeController {
 	public ModelAndView indexPage(HttpSession session)
 	{
 		ModelAndView view =new ModelAndView("index");
-		session.setAttribute("electronics", subCategoryDao.getElectornic());
+		session.setAttribute("electronics", subCategoryDao.getElectronics());
 		return view;
 	}
+	
 	@RequestMapping("/contact")
 	public ModelAndView contact()
 	{

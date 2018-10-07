@@ -1,10 +1,13 @@
 package ecommerce.daoImp.cart;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ecommerce.daolayer.cart.CartItemIdDao;
+import ecommerce.model.cart.CartItem;
 import ecommerce.model.cart.CartItemId;
 
 public class CartItemIdImp implements CartItemIdDao{
@@ -81,4 +84,22 @@ public class CartItemIdImp implements CartItemIdDao{
 		
 	}
 
-}
+	@Override
+	public List<CartItemId> getAllCartItemIdByCartItemId_id(long cartItemId_id) {
+		try {
+			Query<CartItemId> query=sessionFactory.getCurrentSession().createQuery("from CartItemId where cartItem_cartItem_id=:cart_id",CartItemId.class);
+			query.setParameter("cart_id", cartItemId_id);
+			return query.getResultList();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+	}
+
+	
+	
+
+
+

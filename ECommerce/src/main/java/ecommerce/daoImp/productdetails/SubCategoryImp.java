@@ -42,16 +42,15 @@ public class SubCategoryImp implements SubCategoryDao{
 	}
 
 	@Override
-	public List<SubCategory> getElectornic() {
-		// TODO Auto-generated method stub
+	public List<SubCategory> getElectronics() {
 		try {
-			Query<SubCategory> query=sessionFactory.getCurrentSession().createQuery("from SubCategory where category_categoryId=1", SubCategory.class);
+			Query<SubCategory> query = sessionFactory.getCurrentSession()
+					.createQuery("from SubCategory where category_categoryId=1", SubCategory.class);
+
 			return query.getResultList();
-					}catch (Exception e) {
-			// TODO: handle exception
-						e.printStackTrace();
+		} catch (Exception e) {
+			return null;
 		}
-		return null;
 	}
 
 	

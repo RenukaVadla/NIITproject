@@ -138,10 +138,10 @@ public class ProductController {
         	 return "redirect:/subcategory";
             }
      }
-	/*@GetMapping("productdetails")
-	public String getProducts(HttpSession session,Model model,Map<String,Object> products) {
+	/*@GetMapping("/vendor/productdetails")
+	public String getProducts(HttpSession session,Model model,Map<String,Object> products,Principal principal) {
 		
-		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		Vendor vendor=vendorDao.getUserByEmail(principal.getName());
 		System.out.println(vendor);
 		System.out.println(vendor.getVendor_id());
 		products.put("productList", productDao.getAllProducts(vendor.getVendor_id()));
@@ -196,10 +196,53 @@ public class ProductController {
 	public String getProducts(@PathVariable("subcategory_id")long subcategory_id,Map<String,Object> products)
 	{
 		
+		System.out.println(productDao.getProductBySubCategory_id(subcategory_id));
 		products.put("productList",productDao.getProductBySubCategory_id(subcategory_id));
 		
 		
 		return "products";
+	}
+	
+	@GetMapping("productdescription/{product_id}")
+	public String productDescription(@PathVariable("product_id") long product_id, Model model)
+	{
+		System.out.println(productDao.getSubCategoryId(product_id));
+
+		String name=subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id)).getSubCategory_name();
+		System.out.println(name);
+		switch(name)
+		{
+		case "Mobile":
+			model.addAttribute("mobile",mobileDao.getMobileDetails(product_id));
+			System.out.println(mobileDao.getMobileDetails(product_id));
+			return "viewmobile";
+		case "Laptop":
+			model.addAttribute("laptop", laptopDao.getlaptopDetails(product_id));
+			return "viewlaptop";
+		default:
+			return "index";
+		}
+	}
+	
+	@GetMapping("customer/buy/{product_id}")
+	public String buy(@PathVariable("product_id") long product_id, Model model)
+	{
+		System.out.println(productDao.getSubCategoryId(product_id));
+		System.out.println(product_id);
+		String name=subcategoryDao.getSubCategory(productDao.getSubCategoryId(product_id)).getSubCategory_name();
+		System.out.println(name);
+		switch(name)
+		{
+		case "Mobile":
+			System.out.println(mobileDao.getMobileDetails(product_id));
+			model.addAttribute("mobile",mobileDao.getMobileDetails(product_id));
+			return "buymobile";
+		case "Laptop":
+			model.addAttribute("laptop", laptopDao.getlaptopDetails(product_id));
+			return "buylaptop";
+		default:
+			return "index";
+		}
 	}
 	
 }
