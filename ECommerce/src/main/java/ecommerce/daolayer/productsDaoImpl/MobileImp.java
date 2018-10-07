@@ -66,7 +66,9 @@ public class MobileImp implements MobileDao
 	@Override
 	public Mobile getMobileDetails(long product_id) {
 		try {
-			return sessionFactory.getCurrentSession().get(Mobile.class,product_id);
+			Query<Mobile> query=sessionFactory.getCurrentSession().createQuery("from Mobile where product_id=:product_id",Mobile.class);
+			query.setParameter("product_id", product_id);
+			return query.getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}

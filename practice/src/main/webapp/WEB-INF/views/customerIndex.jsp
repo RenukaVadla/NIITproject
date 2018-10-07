@@ -37,6 +37,11 @@
 						</c:forEach>
 		</div></li>
 	<li>
+		<a class="nav-link" href="${contextPath }/customer/cart">Cart</a>
+	</li>
+	<li class="nav-item">
+    	<a class="nav-link" href="${contextPath }/">Home page</a>
+    </li>
   </ul>
 </nav>
 </body>

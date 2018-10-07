@@ -60,7 +60,7 @@ public class CustomerController {
 		return "customerlogin";
 	}
 	
-	@GetMapping("/customer/customerindex")
+	@GetMapping("customer/customerindex")
 	public String customerLogin()
 	{
 		

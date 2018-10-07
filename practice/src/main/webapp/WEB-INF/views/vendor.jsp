@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<c:url value="/resource/resource/" var="image"></c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet"
@@ -33,9 +34,12 @@
     	<a class="nav-link" href="${contextPath }/vendor/productdetails">View Products</a>
     </li>
      <li class="nav-item">
-    	<a class="nav-link" href="/">Home page</a>
+    	<a class="nav-link "  href="${contextPath }/">Home page</a>
     </li>
    </ul>
  </nav>
+ <div class="container">            
+  <img class="mx-auto d-block" src="${image}vendor.png" width="460" height="345"> 
+</div>
 </body>
 </html>

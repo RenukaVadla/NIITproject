@@ -43,10 +43,16 @@
 		<td><springform:input path="product_price"/></td>
 </tr>
 <tr>
+		<td>Warrenty</td>
+		<td><springform:input path="warrenty" /></td>
+	</tr>
+<tr>
 		<td>Image</td>
 		<td><springform:input path="image" type="file" /></td>
 </tr>
-	<springform:button type="submit" value="Submit">Save</springform:button>
+<tr>
+	<td><springform:button type="submit" value="Submit">Save</springform:button></td>
+	</tr>
 </table>
 </springform:form>
 </body>

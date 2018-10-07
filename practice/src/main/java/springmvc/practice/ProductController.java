@@ -117,25 +117,27 @@ public class ProductController {
 		model.addAttribute("laptop", new Laptop());
 		return "laptop";
 	}
-	@PostMapping("/vedor/addlaptop")
-	public String addLaptop(@ModelAttribute("laptop") Laptop laptop,HttpServletRequest request,HttpSession session)
+	@PostMapping("/vendor/addlaptop")
+	public String addLaptop(@ModelAttribute("laptop") Laptop laptop,HttpServletRequest request,Principal principal)
 	{
 		
 		System.out.println(laptop);
 		List<NoOfProducts> noOfProducts=listOfProducts(laptop);
 		laptop.setNoOfProducts(noOfProducts);
 		
-		Vendor vendor=(Vendor)session.getAttribute("vendor");
+		Vendor vendor=vendorDao.getUserByEmail(principal.getName());
+		System.out.println(vendor);
 		laptop.setVendor(vendor);
 		
 		laptop.setNoOfProducts(noOfProducts);
+		
 		if(laptopDao.addLaptop(laptop))
 		{
             imageUpload.saveImage(laptop, request);
-            return "redirect:/category";
+            return "redirect:/vendor/category";
 		}
         else{
-        	 return "redirect:/subcategory";
+        	 return "redirect:/vendor/subcategory";
             }
      }
 	/*@GetMapping("/vendor/productdetails")

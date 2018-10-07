@@ -2,14 +2,18 @@ package ecommerce.daoImp.cart;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import ecommerce.daolayer.cart.CartItemIdDao;
 import ecommerce.model.cart.CartItem;
 import ecommerce.model.cart.CartItemId;
-
+@Component
+@Transactional
 public class CartItemIdImp implements CartItemIdDao{
 	@Autowired
 	SessionFactory sessionFactory;

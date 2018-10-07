@@ -78,7 +78,7 @@ public class CartImp implements CartDao{
 	public Cart getCartByCustomerId(int customer_id) {
 //		// TODO Auto-generated method stub		
 		try {
-			Query<Cart> query=sessionFactory.getCurrentSession().createQuery("from Cart where customer_id=:customer_id",Cart.class);
+			Query<Cart> query=sessionFactory.getCurrentSession().createQuery("from Cart where customer_customer_id=:customer_id",Cart.class);
 			query.setParameter("customer_id", customer_id);
 			return query.getSingleResult();
 			
