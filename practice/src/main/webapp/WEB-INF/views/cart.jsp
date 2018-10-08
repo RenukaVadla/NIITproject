@@ -7,9 +7,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
 <c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="${contextPath }/customer/customerprofile">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${contextPath }/customer/customerindex">Home page</a>
+    </li>
+	<%-- <li class="nav-item">
+    	<a class="nav-link" href="${contextPath }/">Home page</a>
+    </li> --%>
+  </ul>
+</nav>
 	<table class="table">
 		<thead>
 			<tr>
@@ -28,6 +51,15 @@
 					<td>${cartItem.cartItemId[0].noOfProducts.product.product_brand}</td>
 					<td>${cartItem.cartItemId[0].noOfProducts.product.product_price}</td>
 					<td>${cartItem.quantity}</td>
+					
+						<form action="${contextPath }/customer/updatequantity" method="post">
+						
+					<td><input  name="quantity" value="${cartItem.quantity}"></td>
+					<input type="hidden" value="${cartItem.cartItem_id }" name="cartItem_id">
+		             <td><input type="reset" value="update"></td>
+		
+	                   </form>
+				
 					<td>${cartItem.cartItemId[0].noOfProducts.product.product_price * cartItem.quantity}</td>
 					
 					<td><a href="${contextPath}/customer/${cartItem.cartItem_id}"><input

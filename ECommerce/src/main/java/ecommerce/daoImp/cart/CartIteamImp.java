@@ -133,5 +133,17 @@ public class CartIteamImp implements CartItemDao{
 		return null;
 	}
 
+	@Override
+	public CartItem getCartItem(int cartItemId) {
+		try {
+			return sessionFactory.getCurrentSession().createQuery("from CartItem where cartItem_id=:id",CartItem.class)
+			.setParameter("id", cartItemId)
+			.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
 	
 }
