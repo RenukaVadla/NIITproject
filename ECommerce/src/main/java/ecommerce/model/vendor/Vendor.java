@@ -26,30 +26,30 @@ public class Vendor {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long vendor_id;
 	
-	@NotNull(message="name should not be null")
+	/*@NotNull(message="name should not be null")
 	@NotBlank(message="name should not be blank")
-	@Column(unique=false, nullable=false)
+	@Column(unique=false, nullable=false)*/
 	private String vendor_name;
 	
-	@NotNull(message="mobile number should not be null")
+	/*@NotNull(message="mobile number should not be null")
 	@NotBlank(message="mobile number should not be blank")
 	@Pattern(regexp="^[6-9]\\d{9}" ,message="enter valid mobile number")
-	@Column(unique=true,nullable=false)
+	@Column(unique=true,nullable=false)*/
 	private String vendor_mobile;
 	
 	@Column(unique=true, nullable=false)
 	private String company_name;
 	
-	@NotNull(message="Email should not be null")
+	/*@NotNull(message="Email should not be null")
 	@NotBlank(message="Email should not be blank")
 	@Pattern(regexp="[a-z0-9]{5,15}@[a-z]{3,6}\\.[a-z]{2,6}", message="enter valid email")
-	@Column(unique=true, nullable=false)
+	@Column(unique=true, nullable=false)*/
 	private String vendor_email;
 	
-	@NotNull(message="Password should not be null")
+	/*@NotNull(message="Password should not be null")
 	@NotBlank(message="Password  should not be blank")
 	@Column(unique=false, nullable=false)
-	private String vendor_password;
+*/	private String vendor_password;
 	
 	private boolean status=false;
 	

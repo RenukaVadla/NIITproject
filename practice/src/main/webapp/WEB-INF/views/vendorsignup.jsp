@@ -36,35 +36,35 @@
             
             <div class="form-group">
             <label for="vendor_name">Name:</label>    
-            <springform:input path="vendor_name" class="form-control" id="vendor_name"/>    
+            <springform:input path="vendor_name" class="form-control" />    
             <springform:errors path="vendor_name"></springform:errors>    
             </div>
             
             <div class="form-group">
             <label for="company_name">Company:</label>    
-            <springform:input path="company_name" class="form-control" id="company_name"/>        
+            <springform:input path="company_name" class="form-control" />        
             </div>    
             
             <div class="form-group">
             <label for="vendor_mobile">Mobile:</label>    
-            <springform:input path="vendor_mobile" class="form-control" id="vendor_mobile"/>        
+            <springform:input path="vendor_mobile" class="form-control" />        
             </div>    
             
             
             <div class="form-group">
             <label for="vendor_emaill">Email Id:</label>
-            <springform:input path="vendor_email" class="form-control" id="vendor_email"/>
+            <springform:input path="vendor_email" class="form-control" />
             </div>
             
             
             <div class="form-group">
             <label for="vendor_password">Password:</label>    
-            <springform:input path="vendor_password" class="form-control" id="vendor_password"/>        
+            <springform:input path="vendor_password" class="form-control" />        
             </div>
             
             <div class="form-group">
             <label for="cofirmpassword">Confirm Password:</label>    
-            <springform:input path="cofirmpassword" class="form-control" id="cofirmpassword"/>        
+            <springform:input path="cofirmpassword" class="form-control" />        
             </div>
             
 

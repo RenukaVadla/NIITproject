@@ -45,6 +45,7 @@ public class VendorController {
  		model.addAttribute("vendor", new Vendor());
 		return "vendorsignup";
 	}
+	
 	@GetMapping("/vendorlogin")
 	public String getUser(Principal principal)
 	{

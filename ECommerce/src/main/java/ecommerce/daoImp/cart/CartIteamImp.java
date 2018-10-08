@@ -117,17 +117,20 @@ public class CartIteamImp implements CartItemDao{
 	}
 
 	@Override
-	public int getCartItemIdbycartItem_id(int cartItem_id) {
+	public CartItem getCartItemIdbycartItem_id(int cartItem_id) {
 		// TODO Auto-generated method stub
 		try {
-		return (int) sessionFactory.getCurrentSession().createQuery("from CartItem where cartItem_id=:cartItem_id")
-				.setParameter("cartItem_id", cartItem_id).getSingleResult();
+		/*return (int) sessionFactory.getCurrentSession().createQuery("from CartItem where cartItem_id=:cartItem_id")
+				.setParameter("cartItem_id", cartItem_id).getSingleResult();*/
+			Query<CartItem> query=sessionFactory.getCurrentSession().createQuery("from CartItem where cartItem_id=:cartItem_id",CartItem.class);
+			query.setParameter("cartItem_id", cartItem_id);
+			return query.getSingleResult();
 			
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return 0;
+		return null;
 	}
 
 	

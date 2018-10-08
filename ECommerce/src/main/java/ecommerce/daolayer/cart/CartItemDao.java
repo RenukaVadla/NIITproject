@@ -12,6 +12,6 @@ public interface CartItemDao {
 	public List<CartItem> getAllCartItemIdByCartid(int cart_id);
 	public abstract boolean deletecartByCartItem_id(int cartd_id);
 	public List<CartItem> getCartItemId(int cartItem_id);
-	public int getCartItemIdbycartItem_id(int cartItem_id);
+	public CartItem getCartItemIdbycartItem_id(int cartItem_id);
 
 }

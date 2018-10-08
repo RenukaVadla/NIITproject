@@ -80,6 +80,7 @@ public class CartController {
 	  noOfProductsList=noOfProductsDao.getNoOfProducts(product_id);
 	  for (int i = 0; i < quantity; i++)
 	  { 
+		  cartItem=new CartItem();
 		cartItemId=new CartItemId();
 		noOfProducts = new NoOfProducts();
 		noOfProducts = noOfProductsList.get(i);
@@ -98,8 +99,9 @@ public class CartController {
 	  cart.setCustomer(customer);
 	  cart.setNetPrice(unitprice*quantity);
 	  cart.setNoOfitems(quantity);
-	  cartDao.addcart(cart); 
-	  return "cart"; 
+	  cartDao.addcart(cart);
+	
+	  return "redirect:/customer/cart"; 
 	  }else
 	  { cartItem =checkIfProductAlreadyExists(product_id, cart);
 	  
@@ -110,15 +112,14 @@ public class CartController {
 	  List<CartItem> cartItemsList = new ArrayList<CartItem>();
 	  cartItemsList = cart.getCartItem();
 	  int position = cartItemsList.indexOf(cartItem);
-	  List<NoOfProducts> noOfProductsList =
-	  noOfProductsDao.getNoOfProducts(product_id);
+	  List<NoOfProducts> noOfProductsList = noOfProductsDao.getNoOfProducts(product_id);
 	  
-	  cartItemIdsList =
-	  cartItemIdDao.getAllCartItemIdByCartItemId_id(cartItemId.getCartItemId_id());
+	  cartItemIdsList = cartItemIdDao.getAllCartItemIdByCartItemId_id(cartItemId.getCartItemId_id());
 	  
 	  for (int i = 0; i < quantity; i++)
 	  {
-		  cartItemId = new CartItemId();
+		
+		cartItemId = new CartItemId();
 	 	noOfProducts = new NoOfProducts();
 	 	noOfProducts = noOfProductsList.get(i);
 	 	noOfProducts.setSold(true); 
@@ -127,6 +128,7 @@ public class CartController {
 	 	cartItemIdsList.add(cartItemId);
 	 }
 	  	cartItem.setCartItemId(cartItemIdsList);
+	  	cartItem.setQuantity(quantity);
 	  	cartItemsList.add(position,cartItem); 
 	  	cart.setCartItem(cartItemsList); 
 	  	cart.setNetPrice((quantity *unitprice) + cart.getNetPrice());
@@ -144,16 +146,23 @@ public class CartController {
 	  noOfProductsDao.getNoOfProducts(product_id); 
 	  for (int i = 0; i < quantity;i++)
 	  { 
-		  cartItemId = new CartItemId(); noOfProducts = new NoOfProducts();
+		  cartItemId = new CartItemId();
+		  noOfProducts = new NoOfProducts();
 		  noOfProducts = numberOfProductsList.get(i); 
 		  noOfProducts.setSold(true);
 		  cartItemId.setNoOfProducts(noOfProducts); cartItemId.setCartItem(cartItem);
-		  cartItemIdsList.add(cartItemId); } cartItem.setUnitPrice(unitprice);
-		  cartItem.setNetPrice(quantity*unitprice); cartItem.setQuantity(quantity);
-		  cartItem.setCartItemId(cartItemIdsList); cartItem.setCart(cart);
-		  cartItemsList.add(cartItem); cart.setCartItem(cartItemsList);
+		  cartItemIdsList.add(cartItemId);
+		 }
+	  	cartItem.setUnitPrice(unitprice);
+		  cartItem.setNetPrice(quantity*unitprice); 
+		  cartItem.setQuantity(quantity);
+		  cartItem.setCartItemId(cartItemIdsList); 
+		  cartItem.setCart(cart);
+		  cartItemsList.add(cartItem);
+		  cart.setCartItem(cartItemsList);
 		  cart.setNoOfitems(quantity + cart.getNoOfitems());
-		  cart.setNetPrice(unitprice*quantity); cartDao.updatecart(cart);
+		  cart.setNetPrice(unitprice*quantity); 
+		  cartDao.updatecart(cart);
 	  
 	  return "redirect:/customer/cart";
 	  }
@@ -201,7 +210,7 @@ public class CartController {
 	  @GetMapping("customer/{cartItem_id}")
 	  public String deleteFromCart(@PathVariable("cartItem_id")int cartItem_id)
 	  {
-		  cartItemDao.deletecartByCartItem_id(cartItemDao.getCartItemIdbycartItem_id(cartItem_id));
+		  cartItemDao.deletecartByCartItem_id(cartItem.getCartItem_id());
 		  return "redirect:/customer/customerindex";
 	  }
 }
