@@ -60,4 +60,17 @@ public class NoOfproductaImp implements NoOfProductsDao{
 		return null;
 	}
 
+	@Override
+	public boolean getStatusOfproduct(long product_id) {
+		// TODO Auto-generated method stub
+		try {
+			Query<NoOfProducts> query=sessionFactory.getCurrentSession().createQuery("from NoOfProducts where product_product_id=:id",NoOfProducts.class);
+			query.setParameter("id", product_id);
+			return query.getSingleResult().isSold();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+
 }

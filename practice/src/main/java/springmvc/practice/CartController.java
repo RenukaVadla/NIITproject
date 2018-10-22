@@ -53,6 +53,8 @@ public class CartController {
 	CartItemIdDao cartItemIdDao;
 	@Autowired
 	Product product;
+	@Autowired
+	NoOfProducts NoOfProducts;
 
 	@GetMapping("customer/addtocart")
 	public String addToCart(Principal principal, HttpServletRequest request) {
@@ -222,8 +224,57 @@ public class CartController {
 		int cartItem_id=Integer.parseInt(request.getParameter("cartItem_id"));
 		int quantity=Integer.parseInt(request.getParameter("quantity"));
 		
+		long product_id = Long.parseLong(request.getParameter("product_id"));
+		Product product = productDao.getProduct(product_id);
 		
-		List<CartItem> cartItemlist=new ArrayList<>();
+		
+		
+		int unitprice = productDao.getProduct(product_id).getProduct_price();
+
+		
+		CartItem cartItem=cartItemDao.getCartItem(cartItem_id);
+		
+		
+		
+		Cart cart=cartItem.getCart();
+		
+		cart.setNoOfitems(cart.getNoOfitems()-cartItem.getQuantity()+quantity);
+		cart.setNetPrice(cart.getNetPrice()-cartItem.getNetPrice()+(cartItem.getUnitPrice()*quantity));
+		cartItem.setNetPrice(cartItem.getUnitPrice()*quantity);
+		cartItem.setQuantity(quantity);
+		
+		List<CartItemId> cartItemIds=cartItem.getCartItemId();
+		List<CartItem> CartItemList=cart.getCartItem();
+		
+		int diffquantitiy=quantity-cartItemIds.size();
+		
+		List<NoOfProducts> noOfProductsList=noOfProductsDao.getNoOfProducts(product_id);
+		if(noOfProductsDao.getStatusOfproduct(product_id)==true)
+		{
+			for(int i=1;i<=diffquantitiy;i++)
+			{
+				NoOfProducts noOfProducts= new NoOfProducts();
+				CartItemId cartItemId=new CartItemId();
+				cartItemId.setCartItem(cartItem);
+				cartItemId.setNoOfProducts(noOfProducts);
+				cartItemId.setCartItem(cartItem);
+				cartItemIds.add(cartItemId);
+			}
+			cartItem.setCartItemId(cartItemIds);
+			cartItem.setQuantity(diffquantitiy);
+			cartItem.setNetPrice(diffquantitiy*unitprice);
+			CartItemList.add(cartItem);
+			cart.setCartItem(CartItemList);
+			cart.setNoOfitems(diffquantitiy + cart.getNoOfitems());
+			cart.setNetPrice(unitprice * diffquantitiy);
+			cartDao.updatecart(cart);
+
+			return "redirect:/customer/cart";
+		}else
+		{
+			return "redirect:/customer/customerindex";
+		}
+		/*List<CartItem> cartItemlist=new ArrayList<>();
 		cartItemlist=cartItemDao.getCartItemId(cartItem_id);
 		int index=cartItemlist.indexOf(cartItem);
 		List<CartItemId> cartItemIdList=new ArrayList<>();
@@ -237,7 +288,7 @@ public class CartController {
 		int tempQuantity=0;
 		if(quantity>cartItem.getQuantity())
 		{
-			tempQuantity	=quantity-cartItem.getQuantity();
+			tempQuantity=quantity-cartItem.getQuantity();
 			
 				if(checkAvailabilityOfProducts(product.getProduct_id(), tempQuantity)==true)
 				{
@@ -262,14 +313,14 @@ public class CartController {
 					 cart.setNetPrice(cart.getNetPrice()+(unitprice*tempQuantity));
 					 cart.setNoOfitems(cart.getNoOfitems()+tempQuantity);
 					 cartDao.updatecart(cart);
-					 return "";
+					 return "cart";
 			}
 		}else if(quantity<cartItem.getQuantity())
 		{
 			
-		}
+		}*/
 		
-		return "redirect:/cart";
+		/*return "redirect:/cart";*/
 	}
 	
 	/*@GetMapping("customer/deleteproduct/{cartItem_id}")
@@ -288,8 +339,5 @@ public class CartController {
 	}*/
 	
 	
-	public void addOneProduct()
-	{
-		
-	}
+	
 }

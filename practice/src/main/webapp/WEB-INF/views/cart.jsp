@@ -50,13 +50,13 @@
 				<tr>
 					<td>${cartItem.cartItemId[0].noOfProducts.product.product_brand}</td>
 					<td>${cartItem.cartItemId[0].noOfProducts.product.product_price}</td>
-					<td>${cartItem.quantity}</td>
+					<%-- <td>${cartItem.quantity}</td> --%>
 					
-						<form action="${contextPath }/customer/updatequantity" method="post">
+					<form action="${contextPath }/customer/updatequantity" method="post">
 						
-					<td><input  name="quantity" value="${cartItem.quantity}"></td>
+					<td><input  type="number" name="quantity" value="${cartItem.quantity}">
 					<input type="hidden" value="${cartItem.cartItem_id }" name="cartItem_id">
-		             <td><input type="reset" value="update"></td>
+		             <input type="button" value="update"></td>
 		
 	                   </form>
 				
