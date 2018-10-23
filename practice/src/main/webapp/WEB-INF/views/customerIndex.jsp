@@ -40,7 +40,7 @@
 		<a class="nav-link" href="${contextPath }/customer/cart">Cart</a>
 	</li>
 	<li class="nav-item">
-    	<a class="nav-link" href="${contextPath }/">Home page</a>
+    	<a class="nav-link" href="${contextPath }/">log out</a>
     </li>
   </ul>
 </nav>

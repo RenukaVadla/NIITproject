@@ -14,7 +14,6 @@ import ecommerce.model.vendor.Vendor;
 
 @Component
 @Transactional
-
 public class AdminImp implements AdminDao {
 	@Autowired
 	private SessionFactory sessionFactory;

@@ -21,14 +21,14 @@
 <c:set value="${pageContext.request.contextPath }" var="contextPath"></c:set>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
-    <!-- <li class="nav-item">
-      <a class="nav-link" href="login">vendor</a>
-    </li> -->
     <li class="nav-item">
-      <a class="nav-link" href="category">category</a>
+      <a class="nav-link" href="${contextPath}/vendor/vendor">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${contextPath }/vendor/category">category</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="/">Home Page</a>
+      <a class="nav-link" href="${contextPath }/">Logout</a>
     </li>
   </ul>
   </nav>

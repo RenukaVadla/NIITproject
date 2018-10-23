@@ -33,10 +33,15 @@
      <li class="nav-item">
     	<a class="nav-link" href="${contextPath }/vendor/productdetails">View Products</a>
     </li>
-     <li class="nav-item">
-    	<a class="nav-link "  href="${contextPath }/">Home page</a>
-    </li>
+     <%-- <li class="nav-item" >
+    	<a class="nav-link "  href="${contextPath }/">Log Out</a>
+    </li> --%>
    </ul>
+
+   <ul class="nav justify-content-end">
+        <li><a class="nav-link "  href="${contextPath }/">Log Out</a></li>
+    </ul>
+ 
  </nav>
  <div class="container">            
   <img class="mx-auto d-block" src="${image}vendor.png" width="460" height="345"> 

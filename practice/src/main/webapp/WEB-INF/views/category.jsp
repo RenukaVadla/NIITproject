@@ -20,15 +20,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-  <li class="nav-item">
-      <a class="nav-link" href="vendor">vendor</a>
-    </li>
-    <li class="nav-item active">
-      <a class="nav-link" href="/">Home Page</a>
+  <ul class="navbar-nav active">
+  <li class="nav-item ">
+      <a class="nav-link" href="${contextPath }/vendor/vendor">Home</a>
     </li>
   </ul>
+  <ul class="nav justify-content-end">
+        <li><a class="nav-link "  href="${contextPath }/">Log Out</a></li>
+    </ul>
+  
 </nav>
 <li class="nav-item dropdown"><a
 		class="nav-link dropdown-toggle text-danger" href="#" id="navbardrop"

@@ -18,15 +18,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="bg">
+  <div class="container-fluid bg">
+                <div class="row">
+                 
 <div id="login-box">
-	<h2>Login with Username and Password</h2>
+	<h2 style="text-align:center;">Login with Username and Password</h2>
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
 		</c:if>
-<form name='loginForm'
+<!-- <form name='loginForm'
 		  action="vendor/vendorloginprocess"  method='POST'>
  <table>
  <tr>
@@ -43,6 +47,40 @@
 </tr>
 </table>
 </form>
+ -->
+
+ 
+ 
+ <form action="vendor/vendorloginprocess" method='POST'>
+    <div class="form-group">
+      <label for="email">Name:</label>
+      <input type="text" class="form-control" id="email" name="vendor_email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="vendor_password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
+
+<style>
+.bg {
+         background-image: url(https://images.unsplash.com/photo-1508615039623-a25605d2b022?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7d106299bf1c34b2f367f2280c67a80a&auto=format&fit=crop&w=1500&q=80);
+             width: 100%;
+          height: 100vh; 
+           background-position: center;
+           background-repeat: no-repeat;
+           background-size: cover;
+   }
+form
+       {
+           padding-left: 550px;
+           padding-bottom: 60px;
+       }
+</style>

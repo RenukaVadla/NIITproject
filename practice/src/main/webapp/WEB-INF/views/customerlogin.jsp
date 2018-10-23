@@ -52,14 +52,14 @@
 </div> --%>
 <div class="bg">
 <div id="login-box">
-	<%-- <h2>Login with Email and Password</h2>
+	<h2>Login with Email and Password</h2>
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
 			<div class="msg">${msg}</div>
-		</c:if> --%>
-<form name='loginForm'
+		</c:if>
+<%-- <form name='loginForm'
 		  action="customer/customerloginprocess"  method='POST'>
 		  <h2>Login with Email and Password</h2>
 		<c:if test="${not empty error}">
@@ -83,22 +83,17 @@
 </tr>
 </table>
 </form>
-<!-- <form action="customer/customerloginprocess"  method='POST'>
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="customer_email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="customer_password">
-  </div>
-  <div class="form-group form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form> -->
+ --%><form action="customer/customerloginprocess" method='POST'>
+    <div class="form-group">
+      <label for="email">Name:</label>
+      <input type="text" class="form-control" id="email" name="customer_email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="customer_password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
 </div>
 
@@ -108,7 +103,7 @@
 .bg {
          background-image: url(http://redpithemes.com/Documentation/assets/img/page_bg/page_bg_blur02.jpg);
              width: 100%;
-          /*  height: 100vh; */
+            height: 100vh;
            background-position: center;
            background-repeat: no-repeat;
            background-size: cover;

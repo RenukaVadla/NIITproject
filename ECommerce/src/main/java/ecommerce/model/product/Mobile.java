@@ -3,6 +3,7 @@ package ecommerce.model.product;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -11,8 +12,11 @@ import ecommerce.model.productdetails.Product;
 @Component("mobile")
 public class Mobile extends Product {
 	
+	@NotNull(message="mobile ram should not be null")
 	private String mobile_ram;
+	@NotNull(message="mobile storage should not be null")
 	private String mobile_storage;
+	@NotNull(message="mobile series should not be null")
 	private String mobile_series;
 	
 	
